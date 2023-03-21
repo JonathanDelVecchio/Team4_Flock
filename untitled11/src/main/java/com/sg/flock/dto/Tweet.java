@@ -13,8 +13,8 @@ public class Tweet {
     String img;
     String date;
 
-<<<<<<< HEAD
-=======
+
+
     LinkedList<Reply> replies=new LinkedList<>();
 
     public LinkedList<Reply> getReplies() {
@@ -25,7 +25,7 @@ public class Tweet {
         this.replies = replies;
     }
 
->>>>>>> 249ded7db4ebebd6621b7465c6ef5ff982a761ff
+
     public String getUser_name() {
         return user_name;
     }
