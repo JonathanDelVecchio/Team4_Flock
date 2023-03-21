@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -111,6 +112,86 @@ public class FlockDaoImpl implements FlockDao {
             }
         });
         return replies;
+    }
+    public List<Tweet> getTweetsWithReplies() {
+        String sql = "SELECT * FROM tweet t LEFT JOIN reply r ON t.id = r.tweet_id ORDER BY t.id, r.id";
+        List<Tweet> tweets = new LinkedList<>();
+
+        jdbcTemplate.query(sql, (ResultSet rs) -> {
+            int currentTweetId = 0;
+            Tweet currentTweet = null;
+            List<Reply> currentReplies = null;
+
+            while (rs.next()) {
+                int tweetId = rs.getInt("t.id");
+                if (tweetId != currentTweetId) {
+                    // We've moved on to a new tweet, so add the previous tweet to the list
+                    if (currentTweet != null) {
+                        currentTweet.setReplies((LinkedList<Reply>) currentReplies);
+                        tweets.add(currentTweet);
+                    }
+                    // Create a new tweet object for the current row
+                    currentTweet = new Tweet();
+                    currentTweet.setId(tweetId);
+                    currentTweet.setUser_name(rs.getString("t.user_name"));
+                    currentTweet.setTitle(rs.getString("t.title"));
+                    currentTweet.setPost(rs.getString("t.post"));
+                    currentTweet.setImage(rs.getString("t.img"));
+                    currentTweet.setDate(rs.getString("t.date"));
+
+                    // Create a new list to hold the replies for this tweet
+                    currentReplies = new LinkedList<>();
+                    currentTweetId = tweetId;
+                }
+                // If there is a reply for this row, add it to the current list of replies
+                if (rs.getInt("r.id") != 0) {
+                    Reply reply = new Reply();
+                    reply.setId(rs.getInt("r.id"));
+                    reply.setTweetId(rs.getInt("r.tweet_id"));
+                    reply.setUserName(rs.getString("r.user_name"));
+                    reply.setTitle(rs.getString("r.title"));
+                    reply.setPost(rs.getString("r.post"));
+                    reply.setImg(rs.getString("r.img"));
+                    reply.setDate(rs.getString("r.date"));
+                    currentReplies.add(reply);
+                }
+            }
+            // Add the last tweet to the list
+            if (currentTweet != null) {
+                currentTweet.setReplies((LinkedList<Reply>) currentReplies);
+                tweets.add(currentTweet);
+            }
+        });
+        return tweets;
+    }
+    public List<String> convertTweetsToStrings(List<Tweet> tweets) {
+        List<String> strings = new LinkedList<>();
+
+        for (Tweet tweet : tweets) {
+            StringBuilder sb = new StringBuilder();
+
+            // Add the tweet information to the string
+            sb.append(String.format("[%d] %s - %s\n", tweet.getId(), tweet.getUser_name(), tweet.getDate()));
+            sb.append(String.format("%s\n", tweet.getTitle()));
+            sb.append(String.format("%s\n", tweet.getPost()));
+            sb.append(String.format("%s\n", tweet.getImage()));
+
+            // Add the replies to the string
+            List<Reply> replies = tweet.getReplies();
+            if (replies != null && !replies.isEmpty()) {
+                sb.append(String.format("Replies:\n"));
+                for (Reply reply : replies) {
+                    sb.append(String.format("\t[%d] %s - %s\n", reply.getId(), reply.getUserName(), reply.getDate()));
+                    sb.append(String.format("\t%s\n", reply.getTitle()));
+                    sb.append(String.format("\t%s\n", reply.getPost()));
+                    sb.append(String.format("\t%s\n", reply.getImg()));
+                }
+            }
+            // Add the complete tweet (with replies) to the list of strings
+            strings.add(sb.toString());
+        }
+
+        return strings;
     }
 
 }
