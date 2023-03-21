@@ -1,12 +1,10 @@
-package org.example;
+package org.example.dao;
 
+import org.example.dto.Tweet;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.LinkedList;
-import java.util.List;
-
 @Repository
 public class Dao {
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -58,45 +56,13 @@ public class Dao {
     public void insertTweet(Tweet tweet) {
         String insertTweetSql = "INSERT INTO `mydb`.`tweet` (`user_name`, `title`, `post`, `img`, `date`) VALUES (?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(insertTweetSql, tweet.getUserName(), tweet.getTitle(), tweet.getPost(), tweet.getImg(), tweet.getDate());
+        jdbcTemplate.update(insertTweetSql, tweet.getUserName(), tweet.getTitle(), tweet.getPost(), tweet.getImage(), tweet.getDate());
     }
 
-    public void insertReply(Reply reply) {
+    public void insertReply(int tweetId, String userName, String title, String post, String img, String date) {
         String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, reply.tweet_id, reply.user_name, reply.title, reply.post, reply.img, reply.date);
+        jdbcTemplate.update(sql, tweetId, userName, title, post, img, date);
     }
-    public LinkedList<Tweet> getTweets() {
-        String sql = "SELECT * FROM tweet";
-        List<Tweet> tweets = new LinkedList<>();
-        jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Tweet tweet = new Tweet();
-            tweet.setId(rs.getInt("id"));
-            tweet.setUserName(rs.getString("user_name"));
-            tweet.setTitle(rs.getString("title"));
-            tweet.setPost(rs.getString("post"));
-            tweet.setImg(rs.getString("img"));
-            tweet.setDate(rs.getString("date"));
-            tweets.add(tweet);
-            return tweet;
-        });
-        return (LinkedList<Tweet>) tweets;
-    }
-    public List<Reply> getReplies() {
-        String sql = "SELECT * FROM reply";
-        List<Reply> replies = new LinkedList<>();
-        jdbcTemplate.query(sql, (rs, rowNum) -> {
-            Reply reply = new Reply();
-            reply.setId(rs.getInt("id"));
-            reply.setTweetId(rs.getInt("tweet_id"));
-            reply.setUserName(rs.getString("user_name"));
-            reply.setTitle(rs.getString("title"));
-            reply.setPost(rs.getString("post"));
-            reply.setImg(rs.getString("img"));
-            reply.setDate(rs.getString("date"));
-            replies.add(reply);
-            return reply;
-        });
-        return replies;
-    }
+
 
 }
