@@ -1,12 +1,14 @@
 package com.sg.flock.dto;
 
 public class Tweet {
+
     int id;
     String user_name;
     String title;
     String post;
     String img;
     String date;
+
     public String getUser_name() {
         return user_name;
     }
@@ -55,7 +57,6 @@ public class Tweet {
         this.id = id;
     }
 
-
     public String getImg() {
         return img;
     }
@@ -63,6 +64,5 @@ public class Tweet {
     public void setImg(String img) {
         this.img = img;
     }
-
 
 }
