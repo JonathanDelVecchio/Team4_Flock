@@ -70,10 +70,16 @@ public class FlockDaoImpl implements FlockDao {
     }
 
     @Override
-    public void insertReply(int tweetId, String userName, String title, String post, String img, String date) {
+    public void insertReply(Reply reply) {
+        String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, reply.getTweet_id(), reply.getUserName(), reply.getTitle(), reply.getPost(), reply.getImg(), reply.getDate());
+    }
+    /*
+        public void insertReply(int tweetId, String userName, String title, String post, String img, String date) {
         String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, tweetId, userName, title, post, img, date);
     }
+    */
 
     @Override
     public List<Tweet> getAllTweets() {

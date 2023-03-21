@@ -18,8 +18,9 @@ public interface FlockDao {
     
     void insertTweet(Tweet tweet);
     
-    void insertReply(int tweetId, String userName, String title, String post, String img, String date);
-    
+    void insertReply(Reply reply);
+    //    void insertReply(int tweetId, String userName, String title, String post, String img, String date);
+
     List<Tweet> getAllTweets();
     
     List<Reply> getRepliesForTweetId(int tweetId);
