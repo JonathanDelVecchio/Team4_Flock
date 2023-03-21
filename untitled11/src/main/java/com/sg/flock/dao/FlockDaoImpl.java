@@ -80,7 +80,26 @@ public class FlockDaoImpl implements FlockDao {
         jdbcTemplate.update(sql, tweetId, userName, title, post, img, date);
     }
     */
-
+    
+    @Override
+    public Tweet getTweetById(int tweetId) {
+        String sql = "SELECT * FROM tweet WHERE id = ?";
+        Tweet tweet = jdbcTemplate.queryForObject(sql, new Object[]{tweetId}, new RowMapper<Tweet>(){
+            @Override
+            public Tweet mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Tweet tweet = new Tweet();
+                tweet.setId(rs.getInt("id"));
+                tweet.setUser_name(rs.getString("user_name"));
+                tweet.setTitle(rs.getString("title"));
+                tweet.setPost(rs.getString("post"));
+                tweet.setImage(rs.getString("img"));
+                tweet.setDate(rs.getString("date"));
+                return tweet;
+            }
+        });
+        return tweet;
+    }
+    
     @Override
     public List<Tweet> getAllTweets() {
         String sql = "SELECT * FROM tweet";

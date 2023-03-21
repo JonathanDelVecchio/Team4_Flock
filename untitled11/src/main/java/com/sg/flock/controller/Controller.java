@@ -45,8 +45,13 @@ public class Controller {
         return dao.getAllTweets();
     }
     
-    @GetMapping("/post/{tweetId}")
+    @GetMapping("/reply/{tweetId}")
     public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) {
         return dao.getRepliesForTweetId(tweetId);
+    }
+    
+    @GetMapping("/post/{tweetId}")
+    public Tweet getTweetById(@PathVariable("tweetId") int tweetId) {
+        return dao.getTweetById(tweetId);
     }
 }
