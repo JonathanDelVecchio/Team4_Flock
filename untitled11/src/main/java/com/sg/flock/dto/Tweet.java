@@ -1,5 +1,9 @@
 package com.sg.flock.dto;
 
+import com.sg.flock.dto.Reply;
+
+import java.util.LinkedList;
+
 public class Tweet {
 
     int id;
@@ -9,6 +13,19 @@ public class Tweet {
     String img;
     String date;
 
+<<<<<<< HEAD
+=======
+    LinkedList<Reply> replies=new LinkedList<>();
+
+    public LinkedList<Reply> getReplies() {
+        return replies;
+    }
+
+    public void setReplies(LinkedList<Reply> replies) {
+        this.replies = replies;
+    }
+
+>>>>>>> 249ded7db4ebebd6621b7465c6ef5ff982a761ff
     public String getUser_name() {
         return user_name;
     }
