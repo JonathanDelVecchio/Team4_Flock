@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,13 +31,13 @@ public class Controller {
     
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
-    public int createPost() {
-        return dao.insertTweet();
+    public void createPost(@RequestBody Tweet tweet) {
+        dao.insertTweet(tweet);
     }
     
     @PostMapping("/reply")
-    public int createReply() {
-        return dao.insertReply();
+    public void createReply(@RequestBody Reply reply) {
+        dao.insertReply(reply);
     }
     
     @GetMapping("/posts")
