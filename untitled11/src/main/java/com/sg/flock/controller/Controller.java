@@ -7,6 +7,7 @@ package com.sg.flock.controller;
 import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
+import com.sg.flock.service.FlockServiceLayer;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,32 +27,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class Controller {
+    /*
     @Autowired
     FlockDao dao;
+    */
+    FlockServiceLayer sl;
     
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody Tweet tweet) {
-        dao.insertTweet(tweet);
+        sl.insertTweet(tweet);
     }
     
     @PostMapping("/reply")
     public void createReply(@RequestBody Reply reply) {
-        dao.insertReply(reply);
+        sl.insertReply(reply);
     }
     
     @GetMapping("/posts")
     public List<Tweet> getAllPosts() {
-        return dao.getAllTweets();
+        return sl.getAllTweets();
     }
     
     @GetMapping("/reply/{tweetId}")
     public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) {
-        return dao.getRepliesForTweetId(tweetId);
+        return sl.getRepliesForTweetId(tweetId);
     }
     
     @GetMapping("/post/{tweetId}")
     public Tweet getTweetById(@PathVariable("tweetId") int tweetId) {
-        return dao.getTweetById(tweetId);
+        return sl.getTweetById(tweetId);
     }
 }

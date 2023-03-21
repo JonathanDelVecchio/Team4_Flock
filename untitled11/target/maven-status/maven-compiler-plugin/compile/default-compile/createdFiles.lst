@@ -1,9 +1,9 @@
-com\sg\flock\dao\DataSourceFactory.class
 com\sg\flock\dao\FlockDao.class
 com\sg\flock\controller\Controller.class
 com\sg\flock\App.class
 com\sg\flock\dao\FlockDaoImpl$1.class
-com\sg\flock\dto\Tweet.class
 com\sg\flock\dao\FlockDaoImpl.class
+com\sg\flock\dao\DataSourceFactory.class
+com\sg\flock\dto\Tweet.class
 com\sg\flock\dto\Reply.class
 com\sg\flock\dao\FlockDaoImpl$2.class
