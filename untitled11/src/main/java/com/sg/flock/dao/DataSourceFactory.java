@@ -10,7 +10,7 @@ public class DataSourceFactory {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc:mysql://localhost:3306/mydb");
         config.setUsername("root");
-        config.setPassword("uuuu");
+        config.setPassword("Il0veremy");
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
