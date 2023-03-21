@@ -1,4 +1,4 @@
-package org.example.dto;
+package com.sg.flock.dto;
 
 public class Tweet {
     int id;

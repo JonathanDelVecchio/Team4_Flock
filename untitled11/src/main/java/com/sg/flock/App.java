@@ -1,4 +1,4 @@
-package org.example;
+package com.sg.flock;
 
 import org.example.dao.Dao;
 import org.springframework.boot.SpringApplication;

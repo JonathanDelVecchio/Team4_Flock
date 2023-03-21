@@ -1,4 +1,4 @@
-package org.example.dao;
+package com.sg.flock.dao;
 
 import org.example.dto.Reply;
 import org.example.dto.Tweet;
