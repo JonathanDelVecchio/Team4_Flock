@@ -1,6 +1,7 @@
 package com.sg.flock;
 
-import org.example.dao.Dao;
+import com.sg.flock.dao.FlockDao;
+import com.sg.flock.dao.FlockDaoImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App {
 
     public static void main(String[] args) {
-        Dao dao=new Dao();
+        FlockDao dao=new FlockDaoImpl();
         dao.createTables();
         SpringApplication.run(App.class, args);
 
