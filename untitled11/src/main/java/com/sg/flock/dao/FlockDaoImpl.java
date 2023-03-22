@@ -25,7 +25,7 @@ public class FlockDaoImpl implements FlockDao {
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
     @Override
-    public void createTables() {
+    public void createTables(){
         String createDbSql = "CREATE DATABASE IF NOT EXISTS " + dbName;
         jdbcTemplate.execute(createDbSql);
 
@@ -63,14 +63,14 @@ public class FlockDaoImpl implements FlockDao {
     }
 
     @Override
-    public void insertTweet(Tweet tweet) {
+    public void insertTweet(Tweet tweet) throws DataPersistenceException{
         String insertTweetSql = "INSERT INTO `mydb`.`tweet` (`user_name`, `title`, `post`, `img`, `date`) VALUES (?, ?, ?, ?, ?)";
 
         jdbcTemplate.update(insertTweetSql, tweet.getUser_name(), tweet.getTitle(), tweet.getPost(), tweet.getImage(), tweet.getDate());
     }
 
     @Override
-    public void insertReply(Reply reply) {
+    public void insertReply(Reply reply) throws DataPersistenceException{
         String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, reply.getTweet_id(), reply.getUserName(), reply.getTitle(), reply.getPost(), reply.getImg(), reply.getDate());
     }
@@ -82,7 +82,7 @@ public class FlockDaoImpl implements FlockDao {
     */
     
     @Override
-    public Tweet getTweetById(int tweetId) {
+    public Tweet getTweetById(int tweetId) throws DataPersistenceException{
         String sql = "SELECT * FROM tweet WHERE id = ?";
         Tweet tweet = jdbcTemplate.queryForObject(sql, new Object[]{tweetId}, new RowMapper<Tweet>(){
             @Override
@@ -101,7 +101,7 @@ public class FlockDaoImpl implements FlockDao {
     }
     
     @Override
-    public List<Tweet> getAllTweets() {
+    public List<Tweet> getAllTweets() throws DataPersistenceException{
         String sql = "SELECT * FROM tweet";
         List<Tweet> tweets = jdbcTemplate.query(sql, new RowMapper<Tweet>() {
             @Override
@@ -120,7 +120,7 @@ public class FlockDaoImpl implements FlockDao {
     }
 
     @Override
-    public List<Reply> getRepliesForTweetId(int tweetId) {
+    public List<Reply> getRepliesForTweetId(int tweetId) throws DataPersistenceException{
         String sql = "SELECT * FROM reply WHERE tweet_id = ?";
         List<Reply> replies = jdbcTemplate.query(sql, new Object[]{tweetId}, new RowMapper<Reply>() {
             @Override
@@ -138,7 +138,7 @@ public class FlockDaoImpl implements FlockDao {
         });
         return replies;
     }
-    public List<Tweet> getTweetsWithReplies() {
+    public List<Tweet> getTweetsWithReplies() throws DataPersistenceException{
         String sql = "SELECT * FROM tweet t LEFT JOIN reply r ON t.id = r.tweet_id ORDER BY t.id, r.id";
         List<Tweet> tweets = new LinkedList<>();
 
@@ -189,7 +189,7 @@ public class FlockDaoImpl implements FlockDao {
         });
         return tweets;
     }
-    public List<String> convertTweetsToStrings(List<Tweet> tweets) {
+    public List<String> convertTweetsToStrings(List<Tweet> tweets) throws DataPersistenceException{
         List<String> strings = new LinkedList<>();
 
         for (Tweet tweet : tweets) {

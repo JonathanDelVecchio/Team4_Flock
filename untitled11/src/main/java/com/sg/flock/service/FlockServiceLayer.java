@@ -4,6 +4,7 @@
  */
 package com.sg.flock.service;
 
+import com.sg.flock.dao.DataPersistenceException;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import java.util.List;
@@ -15,14 +16,18 @@ import java.util.List;
 public interface FlockServiceLayer {
     void createTables();
     
-    void insertTweet(Tweet tweet);
+    void insertTweet(Tweet tweet) throws 
+            TweetValidationException, InvalidTweetIdException, DataPersistenceException;
     
-    void insertReply(Reply reply);
+    void insertReply(Reply reply) throws 
+            ReplyValidationException, InvalidTweetIdException, DataPersistenceException;
 
-    public Tweet getTweetById(int tweetId);
+    public Tweet getTweetById(int tweetId) throws 
+            InvalidTweetIdException, DataPersistenceException;
     
-    List<Tweet> getAllTweets();
+    List<Tweet> getAllTweets() throws DataPersistenceException;
     
-    List<Reply> getRepliesForTweetId(int tweetId);
+    List<Reply> getRepliesForTweetId(int tweetId) throws 
+            InvalidTweetIdException, DataPersistenceException;
     
 }

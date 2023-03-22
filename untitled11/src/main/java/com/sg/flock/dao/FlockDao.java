@@ -16,14 +16,14 @@ public interface FlockDao {
     
     void createTables();
     
-    void insertTweet(Tweet tweet);
+    void insertTweet(Tweet tweet) throws DataPersistenceException;
     
-    void insertReply(Reply reply);
+    void insertReply(Reply reply) throws DataPersistenceException;
     //    void insertReply(int tweetId, String userName, String title, String post, String img, String date);
 
-    public Tweet getTweetById(int tweetId);
+    public Tweet getTweetById(int tweetId) throws DataPersistenceException;
     
-    List<Tweet> getAllTweets();
+    List<Tweet> getAllTweets() throws DataPersistenceException;
     
-    List<Reply> getRepliesForTweetId(int tweetId);
+    List<Reply> getRepliesForTweetId(int tweetId) throws DataPersistenceException;
 }

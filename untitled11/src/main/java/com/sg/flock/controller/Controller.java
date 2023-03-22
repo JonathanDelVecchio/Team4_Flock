@@ -4,6 +4,7 @@
  */
 package com.sg.flock.controller;
 
+import com.sg.flock.dao.DataPersistenceException;
 import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
@@ -11,6 +12,9 @@ import com.sg.flock.service.FlockServiceLayer;
 import java.util.List;
 
 import com.sg.flock.service.FlockServiceLayerImpl;
+import com.sg.flock.service.InvalidTweetIdException;
+import com.sg.flock.service.ReplyValidationException;
+import com.sg.flock.service.TweetValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,27 +48,70 @@ public class Controller {
 
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPost(@RequestBody Tweet tweet) {
-        sl.insertTweet(tweet);
+    public void createPost(@RequestBody Tweet tweet) throws DataPersistenceException, TweetValidationException {
+        // Perform validation checks on the tweet object
+        if (tweet.getPost() == null || tweet.getPost().isEmpty()) {
+            throw new TweetValidationException("Tweet message cannot be empty");
+        }
+        if (tweet.getPost().length() > 280) {
+            throw new TweetValidationException("Tweet message length cannot exceed 280 characters");
+        }
+
+        try {
+            // Insert the tweet into the database
+            sl.insertTweet(tweet);
+        } catch (InvalidTweetIdException ex) {
+            // Handle the exception
+            // For example, you could log the error and re-throw it as a DataPersistenceException
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error inserting tweet into database", ex);
+        }
     }
 
     @PostMapping("/reply")
-    public void createReply(@RequestBody Reply reply) {
-        sl.insertReply(reply);
+    public void createReply(@RequestBody Reply reply) throws DataPersistenceException, ReplyValidationException {
+        // Perform validation checks on the tweet object
+        if (reply.getPost() == null || reply.getPost().isEmpty()) {
+            throw new ReplyValidationException("reply message cannot be empty");
+        }
+        if (reply.getPost().length() > 280) {
+            throw new ReplyValidationException("reply message length cannot exceed 280 characters");
+        }
+
+        try {
+            // Insert the tweet into the database
+            sl.insertReply(reply);
+        } catch (InvalidTweetIdException ex) {
+            // Handle the exception
+            // For example, you could log the error and re-throw it as a DataPersistenceException
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error inserting reply into database", ex);
+        }
     }
 
     @GetMapping("/post")
-    public List<Tweet> getAllPosts() {
+    public List<Tweet> getAllPosts() throws DataPersistenceException{
         return sl.getAllTweets();
     }
 
     @GetMapping("/reply/{tweetId}")
-    public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) {
-        return sl.getRepliesForTweetId(tweetId);
+    public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) throws DataPersistenceException{
+        try{
+            return sl.getRepliesForTweetId(tweetId);
+        } catch (InvalidTweetIdException ex){
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error getting replies from database.");
+        }
     }
 
     @GetMapping("/post/{tweetId}")
-    public Tweet getTweetById(@PathVariable("tweetId") int tweetId) {
-        return sl.getTweetById(tweetId);
+    public Tweet getTweetById(@PathVariable("tweetId") int tweetId) throws DataPersistenceException {
+        
+        try{
+            return sl.getTweetById(tweetId);
+        } catch (InvalidTweetIdException ex) {
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.sg.flock.service;
 
+import com.sg.flock.dao.DataPersistenceException;
 import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dao.FlockDaoImpl;
 import com.sg.flock.dto.Reply;
@@ -28,32 +29,36 @@ public class FlockServiceLayerImpl implements FlockServiceLayer{
     }
 
     @Override
-    public void createTables() {
+    public void createTables(){
         dao.createTables();
     }
 
     @Override
-    public void insertTweet(Tweet tweet) {
+    public void insertTweet(Tweet tweet) throws 
+            TweetValidationException, InvalidTweetIdException, DataPersistenceException{
         dao.insertTweet(tweet);
     }
 
     @Override
-    public void insertReply(Reply reply) {
+    public void insertReply(Reply reply) throws 
+             ReplyValidationException, InvalidTweetIdException, DataPersistenceException{
         dao.insertReply(reply);
     }
 
     @Override
-    public Tweet getTweetById(int tweetId) {
+    public Tweet getTweetById(int tweetId) throws 
+            InvalidTweetIdException, DataPersistenceException{
         return dao.getTweetById(tweetId);
     }
 
     @Override
-    public List<Tweet> getAllTweets() {
+    public List<Tweet> getAllTweets() throws DataPersistenceException{
         return dao.getAllTweets();
     }
 
     @Override
-    public List<Reply> getRepliesForTweetId(int tweetId) {
+    public List<Reply> getRepliesForTweetId(int tweetId) throws 
+            InvalidTweetIdException, DataPersistenceException{
         return dao.getRepliesForTweetId(tweetId);
     }
     
