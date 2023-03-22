@@ -10,16 +10,19 @@ import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrew
  */
+@Component
 public class FlockServiceLayerImpl implements FlockServiceLayer{
 
     @Autowired
     FlockDao dao;
 
+    @Autowired
     public FlockServiceLayerImpl(FlockDaoImpl flockDao) {
         this.dao=flockDao;
     }

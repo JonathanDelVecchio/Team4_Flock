@@ -34,7 +34,8 @@ public class Controller {
     FlockDao dao;
     */
     FlockServiceLayer sl;
-
+    
+    @Autowired
     public Controller(FlockServiceLayer flockServiceLayer) {
         this.sl=flockServiceLayer;
     }
