@@ -30,11 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class Controller {
     /*
-    @Autowired
-    FlockDao dao;
-    */
+      @Autowired
+      FlockDao dao;
+      */
     FlockServiceLayer sl;
-    
+
     @Autowired
     public Controller(FlockServiceLayer flockServiceLayer) {
         this.sl=flockServiceLayer;
@@ -45,22 +45,22 @@ public class Controller {
     public void createPost(@RequestBody Tweet tweet) {
         sl.insertTweet(tweet);
     }
-    
+
     @PostMapping("/reply")
     public void createReply(@RequestBody Reply reply) {
         sl.insertReply(reply);
     }
-    
-    @GetMapping("/posts")
+
+    @GetMapping("/post")
     public List<Tweet> getAllPosts() {
         return sl.getAllTweets();
     }
-    
+
     @GetMapping("/reply/{tweetId}")
     public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) {
         return sl.getRepliesForTweetId(tweetId);
     }
-    
+
     @GetMapping("/post/{tweetId}")
     public Tweet getTweetById(@PathVariable("tweetId") int tweetId) {
         return sl.getTweetById(tweetId);
