@@ -5,6 +5,7 @@
 package com.sg.flock.service;
 
 import com.sg.flock.dao.FlockDao;
+import com.sg.flock.dao.FlockDaoImpl;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import java.util.List;
@@ -18,7 +19,11 @@ public class FlockServiceLayerImpl implements FlockServiceLayer{
 
     @Autowired
     FlockDao dao;
-    
+
+    public FlockServiceLayerImpl(FlockDaoImpl flockDao) {
+        this.dao=flockDao;
+    }
+
     @Override
     public void createTables() {
         dao.createTables();

@@ -20,12 +20,12 @@
          class="com.sg.flock.dao.FlockDaoImpl"/>
     
     <bean id="serviceLayer"
-         class="com.sg.flock.dao.FlockServiceLayerImpt">
+         class="com.sg.flock.service.FlockServiceLayerImpl">
          <constructor-arg ref="dao"/>
    </bean>
    
     <bean id="controller" 
-         class="com.sg.flock.dao.Controller">
+         class="com.sg.flock.controller.Controller">
         <constructor-arg ref="serviceLayer"/>
     </bean>
    

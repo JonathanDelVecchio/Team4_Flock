@@ -3,6 +3,7 @@ package com.sg.flock;
 import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dao.FlockDaoImpl;
 import com.sg.flock.service.FlockServiceLayer;
+import com.sg.flock.service.FlockServiceLayerImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -15,7 +16,7 @@ public class App {
         //FlockDao dao=new FlockDaoImpl();
         //dao.createTables();
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-        FlockServiceLayer sl = ctx.getBean("serviceLayer", FlockServiceLayer.class);
+        FlockServiceLayer sl = ctx.getBean("serviceLayer", FlockServiceLayerImpl.class);
         
         sl.createTables();
         SpringApplication.run(App.class, args);

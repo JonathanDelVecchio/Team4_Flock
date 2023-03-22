@@ -9,6 +9,8 @@ import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import com.sg.flock.service.FlockServiceLayer;
 import java.util.List;
+
+import com.sg.flock.service.FlockServiceLayerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,11 @@ public class Controller {
     FlockDao dao;
     */
     FlockServiceLayer sl;
-    
+
+    public Controller(FlockServiceLayer flockServiceLayer) {
+        this.sl=flockServiceLayer;
+    }
+
     @PostMapping("/post")
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody Tweet tweet) {
