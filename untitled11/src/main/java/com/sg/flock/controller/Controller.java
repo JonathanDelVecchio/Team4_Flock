@@ -50,12 +50,12 @@ public class Controller {
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody Tweet tweet) throws DataPersistenceException, TweetValidationException {
         // Perform validation checks on the tweet object
-        if (tweet.getPost() == null || tweet.getPost().isEmpty()) {
-            throw new TweetValidationException("Tweet message cannot be empty");
-        }
-        if (tweet.getPost().length() > 280) {
-            throw new TweetValidationException("Tweet message length cannot exceed 280 characters");
-        }
+//        if (tweet.getPost() == null || tweet.getPost().isEmpty()) {
+//            throw new TweetValidationException("Tweet message cannot be empty");
+//        }
+//        if (tweet.getPost().length() > 280) {
+//            throw new TweetValidationException("Tweet message length cannot exceed 280 characters");
+//        }
 
         try {
             // Insert the tweet into the database
@@ -71,12 +71,12 @@ public class Controller {
     @PostMapping("/replies")
     public void createReply(@RequestBody Reply reply) throws DataPersistenceException, ReplyValidationException {
         // Perform validation checks on the tweet object
-        if (reply.getPost() == null || reply.getPost().isEmpty()) {
-            throw new ReplyValidationException("reply message cannot be empty");
-        }
-        if (reply.getPost().length() > 280) {
-            throw new ReplyValidationException("reply message length cannot exceed 280 characters");
-        }
+//        if (reply.getPost() == null || reply.getPost().isEmpty()) {
+//            throw new ReplyValidationException("reply message cannot be empty");
+//        }
+//        if (reply.getPost().length() > 280) {
+//            throw new ReplyValidationException("reply message length cannot exceed 280 characters");
+//        }
 
         try {
             // Insert the tweet into the database
