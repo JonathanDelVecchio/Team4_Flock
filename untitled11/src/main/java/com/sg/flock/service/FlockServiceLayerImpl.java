@@ -24,7 +24,7 @@ public class FlockServiceLayerImpl implements FlockServiceLayer{
     FlockDao dao;
 
     @Autowired
-    public FlockServiceLayerImpl(FlockDaoImpl flockDao) {
+    public FlockServiceLayerImpl(FlockDao flockDao) {
         this.dao=flockDao;
     }
 

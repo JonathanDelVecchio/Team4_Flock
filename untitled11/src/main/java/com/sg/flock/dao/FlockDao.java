@@ -7,11 +7,13 @@ package com.sg.flock.dao;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Andrew
  */
+@Component
 public interface FlockDao {
     
     void createTables();

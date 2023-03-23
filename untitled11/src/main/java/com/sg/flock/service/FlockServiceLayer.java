@@ -5,6 +5,7 @@
 package com.sg.flock.service;
 
 import com.sg.flock.dao.DataPersistenceException;
+import com.sg.flock.dao.FlockDaoImpl;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @author Andrew
  */
 public interface FlockServiceLayer {
+    
     void createTables();
     
     void insertTweet(Tweet tweet) throws 
