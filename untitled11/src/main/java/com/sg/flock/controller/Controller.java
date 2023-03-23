@@ -46,7 +46,7 @@ public class Controller {
         this.sl=flockServiceLayer;
     }
 
-    @PostMapping("/post")
+    @PostMapping("/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody Tweet tweet) throws DataPersistenceException, TweetValidationException {
         // Perform validation checks on the tweet object
@@ -68,7 +68,7 @@ public class Controller {
         }
     }
 
-    @PostMapping("/reply")
+    @PostMapping("/replies")
     public void createReply(@RequestBody Reply reply) throws DataPersistenceException, ReplyValidationException {
         // Perform validation checks on the tweet object
         if (reply.getPost() == null || reply.getPost().isEmpty()) {
@@ -89,12 +89,12 @@ public class Controller {
         }
     }
 
-    @GetMapping("/post")
+    @GetMapping("/posts")
     public List<Tweet> getAllPosts() throws DataPersistenceException{
         return sl.getAllTweets();
     }
 
-    @GetMapping("/reply/{tweetId}")
+    @GetMapping("/replies/{tweetId}")
     public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) throws DataPersistenceException{
         try{
             return sl.getRepliesForTweetId(tweetId);
@@ -104,7 +104,7 @@ public class Controller {
         }
     }
 
-    @GetMapping("/post/{tweetId}")
+    @GetMapping("/posts/{tweetId}")
     public Tweet getTweetById(@PathVariable("tweetId") int tweetId) throws DataPersistenceException {
         
         try{
