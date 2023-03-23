@@ -9,8 +9,10 @@ import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dao.FlockDaoImpl;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -19,6 +21,29 @@ import static org.junit.jupiter.api.Assertions.*;
 public class FlockServiceLayerImplTest {
     
     private FlockServiceLayer service;
+    
+    @BeforeEach
+    public void setUp() throws Exception{
+        Tweet tweet = new Tweet();
+        
+        tweet.setUser_name("Nick");
+        tweet.setTitle("Food");
+        tweet.setPost("What is your food recommendations?");
+        tweet.setImg("food pic");
+        tweet.setDate("1/23/2049");
+        
+        service.insertTweet(tweet);
+        
+        Reply reply = new Reply();
+        reply.setTweetId(1);
+        reply.setUserName("Barry");
+        reply.setTitle("salty");
+        reply.setPost("The fried chicken is too salty");
+        reply.setImg("food pic");
+        reply.setDate("1/23/2049");
+        
+        service.insertReply(reply);
+    }
     
     public FlockServiceLayerImplTest() {
         
@@ -30,14 +55,14 @@ public class FlockServiceLayerImplTest {
      * Test of insertTweet method, of class FlockServiceLayerImpl.
      */
     @Test
-    public void testInsertTweet() throws Exception {
+    public void testInsertTweetandgetTweetById() throws Exception {
         Tweet tweet = new Tweet();
         
-        tweet.setUser_name("Nick");
-        tweet.setTitle("Food");
-        tweet.setPost("What is your food recommendations?");
-        tweet.setImg("food pic");
-        tweet.setDate("1/23/2049");
+        tweet.setUser_name("Jonathan");
+        tweet.setTitle("Games");
+        tweet.setPost("What is your game recommendations?");
+        tweet.setImg("Game");
+        tweet.setDate("3/15/2030");
         
         service.insertTweet(tweet);
         // Fetch the inserted tweet and check that it matches the original tweet
@@ -70,7 +95,9 @@ public class FlockServiceLayerImplTest {
         
         service.insertReply(reply);
         // Fetch the inserted tweet and check that it matches the original tweet
-        Reply fetchedReply = service.getRepliesForTweetId(reply.getTweet_id()).get(reply.getId());
+        int num = service.getRepliesForTweetId(reply.getTweet_id()).size();
+        
+        Reply fetchedReply = service.getRepliesForTweetId(reply.getTweet_id()).get(num - 1);
         assertNotNull(fetchedReply);
         assertEquals(reply.getUserName(), fetchedReply.getUserName());
         assertEquals(reply.getTitle(), fetchedReply.getTitle());
@@ -79,19 +106,16 @@ public class FlockServiceLayerImplTest {
         assertEquals(reply.getDate(), fetchedReply.getDate());
     }
 
-    /**
-     * Test of getTweetById method, of class FlockServiceLayerImpl.
-     */
-    @Test
-    public void testGetTweetById() throws Exception {
-        assertNotNull(service.getTweetById(1));
-    }
+    
 
     /**
      * Test of getAllTweets method, of class FlockServiceLayerImpl.
      */
     @Test
     public void testGetAllTweets() throws Exception {
+        List<Tweet> tweets = service.getAllTweets();
+        
+        assertEquals(5, tweets.size());
     }
 
     /**
@@ -99,6 +123,8 @@ public class FlockServiceLayerImplTest {
      */
     @Test
     public void testGetRepliesForTweetId() throws Exception {
+        List<Reply> replies = service.getRepliesForTweetId(1);
+        assertEquals(2, replies.size());
     }
     
 }
