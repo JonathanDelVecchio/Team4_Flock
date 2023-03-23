@@ -26,7 +26,7 @@ public class FlockDaoImpl implements FlockDao {
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     DataSource dataSource = DataSourceFactory.createDataSource();
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             
     @Override
     public void createTables(){
@@ -94,10 +94,10 @@ public class FlockDaoImpl implements FlockDao {
         
     }
 
-    @Override
-    public void editTweet(int id) throws DataPersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    @Override
+//    public void editTweetById(int id, Tweet tweet) throws DataPersistenceException {
+//        String sql = "UPDATE `mydb`.`tweet` SET title =  "
+//    }
 
     @Override
     public void deleteReplyById(int tweetId, int replyId) throws DataPersistenceException {
@@ -106,10 +106,10 @@ public class FlockDaoImpl implements FlockDao {
         jdbcTemplate.update(sql,tweetId, replyId);
     }
 
-    @Override
-    public void editReply(int id) throws DataPersistenceException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    @Override
+//    public void editReply(int id) throws DataPersistenceException {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
     
     @Override
     public Tweet getTweetById(int tweetId) throws DataPersistenceException{

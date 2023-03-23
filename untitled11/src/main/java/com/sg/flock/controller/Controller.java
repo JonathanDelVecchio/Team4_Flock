@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -135,4 +136,24 @@ public class Controller {
             throw new DataPersistenceException("Error getting post from database.");
         }
     } 
+    
+//    @PutMapping("/posts/{tweetId}")
+//    public void editTweetById(@PathVariable("tweetId") int tweetId, @RequestBody Tweet tweet) throws DataPersistenceException {
+//        try{
+//            sl.editTweetById(tweetId, tweet);
+//        } catch (InvalidTweetIdException ex) {
+//            System.out.print(ex.getMessage());
+//            throw new DataPersistenceException("Error getting post from database.");
+//        }
+//    }
+    
+//    @PutMapping("/replies/{tweetId}/{replyId}")
+//    public void editReplyById(@PathVariable("tweetId") int tweetId, @PathVariable("replyId") int replyId) throws DataPersistenceException {
+//        try{
+//            sl.editReplyById(tweetId);
+//        } catch (InvalidTweetIdException ex) {
+//            System.out.print(ex.getMessage());
+//            throw new DataPersistenceException("Error getting post from database.");
+//        }
+//    } 
 }
