@@ -63,15 +63,26 @@ public class FlockServiceLayerImpl implements FlockServiceLayer{
         dao.deleteReplyById(tweetId, replyId);
     }
     
-//    @Override
-//    public void editTweetById(int tweetId, Tweet tweet) throws
-//            InvalidTweetIdException, DataPersistenceException{
-//        dao.editTweetById(tweetId, tweet);
-//    }
+    @Override
+    public void editTweetById(int tweetId, Tweet tweet) throws
+            InvalidTweetIdException, DataPersistenceException{
+        dao.editTweetById(tweetId, tweet);
+    }
+    
+    @Override
+    public void editReplyById(int tweetId, int replyId, Reply reply) throws
+            InvalidTweetIdException, DataPersistenceException{
+        dao.editReplyById(tweetId, replyId, reply);
+    }
 
     @Override
     public List<Tweet> getAllTweets() throws DataPersistenceException{
         return dao.getAllTweets();
+    }
+    
+    @Override
+    public List<Reply> getAllReplies() throws DataPersistenceException{
+        return dao.getAllReplies();
     }
 
     @Override

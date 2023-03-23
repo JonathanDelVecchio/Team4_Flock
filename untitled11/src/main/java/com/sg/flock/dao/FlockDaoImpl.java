@@ -94,10 +94,11 @@ public class FlockDaoImpl implements FlockDao {
         
     }
 
-//    @Override
-//    public void editTweetById(int id, Tweet tweet) throws DataPersistenceException {
-//        String sql = "UPDATE `mydb`.`tweet` SET title =  "
-//    }
+    @Override
+    public void editTweetById(int id, Tweet tweet) throws DataPersistenceException {
+        String sql = "UPDATE `mydb`.`tweet` SET title = ?, post = ?, img = ? WHERE id = ?";
+        jdbcTemplate.update(sql, tweet.getTitle(), tweet.getPost(), tweet.getImg(), id);
+    }
 
     @Override
     public void deleteReplyById(int tweetId, int replyId) throws DataPersistenceException {
@@ -106,10 +107,11 @@ public class FlockDaoImpl implements FlockDao {
         jdbcTemplate.update(sql,tweetId, replyId);
     }
 
-//    @Override
-//    public void editReply(int id) throws DataPersistenceException {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
+    @Override
+    public void editReplyById(int tweetId, int replyId, Reply reply) throws DataPersistenceException {
+        String sql = "UPDATE `mydb`.`reply` SET title = ?, post = ?, img = ? WHERE tweet_id = ? AND id = ?;";
+        jdbcTemplate.update(sql, reply.getTitle(), reply.getPost(), reply.getImg(), tweetId, replyId);
+    }
     
     @Override
     public Tweet getTweetById(int tweetId) throws DataPersistenceException{
@@ -148,6 +150,26 @@ public class FlockDaoImpl implements FlockDao {
             }
         });
         return tweets;
+    }
+    
+    @Override
+    public List<Reply> getAllReplies() throws DataPersistenceException{
+        String sql = "SELECT * FROM reply";
+        List<Reply> replies = jdbcTemplate.query(sql, new RowMapper<Reply>() {
+            @Override
+            public Reply mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Reply reply = new Reply();
+                reply.setId(rs.getInt("id"));
+                reply.setTweetId(rs.getInt("tweet_id"));
+                reply.setUserName(rs.getString("user_name"));
+                reply.setTitle(rs.getString("title"));
+                reply.setPost(rs.getString("post"));
+                reply.setImg(rs.getString("img"));
+                reply.setDate(rs.getString("date"));
+                return reply;
+            }
+        });
+        return replies;
     }
 
     @Override

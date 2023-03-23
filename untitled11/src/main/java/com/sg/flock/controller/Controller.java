@@ -137,23 +137,23 @@ public class Controller {
         }
     } 
     
-//    @PutMapping("/posts/{tweetId}")
-//    public void editTweetById(@PathVariable("tweetId") int tweetId, @RequestBody Tweet tweet) throws DataPersistenceException {
-//        try{
-//            sl.editTweetById(tweetId, tweet);
-//        } catch (InvalidTweetIdException ex) {
-//            System.out.print(ex.getMessage());
-//            throw new DataPersistenceException("Error getting post from database.");
-//        }
-//    }
+    @PutMapping("/posts/{tweetId}")
+    public void editTweetById(@PathVariable("tweetId") int tweetId, @RequestBody Tweet tweet) throws DataPersistenceException {
+        try{
+            sl.editTweetById(tweetId, tweet);
+        } catch (InvalidTweetIdException ex) {
+            System.out.print(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
+    }
     
-//    @PutMapping("/replies/{tweetId}/{replyId}")
-//    public void editReplyById(@PathVariable("tweetId") int tweetId, @PathVariable("replyId") int replyId) throws DataPersistenceException {
-//        try{
-//            sl.editReplyById(tweetId);
-//        } catch (InvalidTweetIdException ex) {
-//            System.out.print(ex.getMessage());
-//            throw new DataPersistenceException("Error getting post from database.");
-//        }
-//    } 
+    @PutMapping("/replies/{tweetId}/{replyId}")
+    public void editReplyById(@PathVariable("tweetId") int tweetId, @PathVariable("replyId") int replyId, @RequestBody Reply reply) throws DataPersistenceException {
+        try{
+            sl.editReplyById(tweetId, replyId, reply);
+        } catch (InvalidTweetIdException ex) {
+            System.out.print(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
+    } 
 }
