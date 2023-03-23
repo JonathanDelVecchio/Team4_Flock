@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.stereotype.Component;
@@ -24,7 +26,8 @@ public class FlockDaoImpl implements FlockDao {
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     DataSource dataSource = DataSourceFactory.createDataSource();
     private final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd hh:mm:ss");
+            
     @Override
     public void createTables(){
         String createDbSql = "CREATE DATABASE IF NOT EXISTS " + dbName;
@@ -65,13 +68,19 @@ public class FlockDaoImpl implements FlockDao {
 
     @Override
     public void insertTweet(Tweet tweet) throws DataPersistenceException{
+        LocalDateTime dateTime = LocalDateTime.now();
+        String dateTimeStr = dateTime.format(formatter);
+        tweet.setDate(dateTimeStr);
         String insertTweetSql = "INSERT INTO `mydb`.`tweet` (`user_name`, `title`, `post`, `img`, `date`) VALUES (?, ?, ?, ?, ?)";
-
+        
         jdbcTemplate.update(insertTweetSql, tweet.getUser_name(), tweet.getTitle(), tweet.getPost(), tweet.getImage(), tweet.getDate());
     }
 
     @Override
     public void insertReply(Reply reply) throws DataPersistenceException{
+        LocalDateTime dateTime = LocalDateTime.now();
+        String dateTimeStr = dateTime.format(formatter);
+        reply.setDate(dateTimeStr);
         String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, reply.getTweet_id(), reply.getUserName(), reply.getTitle(), reply.getPost(), reply.getImg(), reply.getDate());
     }

@@ -22,7 +22,7 @@ public interface FlockDao {
     
     void insertReply(Reply reply) throws DataPersistenceException;
     //    void insertReply(int tweetId, String userName, String title, String post, String img, String date);
-
+    
     public Tweet getTweetById(int tweetId) throws DataPersistenceException;
     
     List<Tweet> getAllTweets() throws DataPersistenceException;

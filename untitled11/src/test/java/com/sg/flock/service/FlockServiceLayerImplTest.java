@@ -30,7 +30,7 @@ public class FlockServiceLayerImplTest {
         tweet.setTitle("Food");
         tweet.setPost("What is your food recommendations?");
         tweet.setImg("food pic");
-        tweet.setDate("1/23/2049");
+//        tweet.setDate("1/23/2049");
         
         service.insertTweet(tweet);
         
@@ -40,7 +40,6 @@ public class FlockServiceLayerImplTest {
         reply.setTitle("salty");
         reply.setPost("The fried chicken is too salty");
         reply.setImg("food pic");
-        reply.setDate("1/23/2049");
         
         service.insertReply(reply);
     }
@@ -62,7 +61,7 @@ public class FlockServiceLayerImplTest {
         tweet.setTitle("Games");
         tweet.setPost("What is your game recommendations?");
         tweet.setImg("Game");
-        tweet.setDate("3/15/2030");
+//        tweet.setDate("3/15/2030");
         
         service.insertTweet(tweet);
         // Fetch the inserted tweet and check that it matches the original tweet
@@ -91,7 +90,6 @@ public class FlockServiceLayerImplTest {
         reply.setTitle("Food");
         reply.setPost("Fried Chicken");
         reply.setImg("food pic");
-        reply.setDate("1/23/2049");
         
         service.insertReply(reply);
         // Fetch the inserted tweet and check that it matches the original tweet
