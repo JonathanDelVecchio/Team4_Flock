@@ -84,12 +84,32 @@ public class FlockDaoImpl implements FlockDao {
         String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, reply.getTweet_id(), reply.getUserName(), reply.getTitle(), reply.getPost(), reply.getImg(), reply.getDate());
     }
-    /*
-        public void insertReply(int tweetId, String userName, String title, String post, String img, String date) {
-        String sql = "INSERT INTO reply (tweet_id, user_name, title, post, img, date) VALUES (?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, tweetId, userName, title, post, img, date);
+   
+    @Override
+    public void deleteTweetById(int id) throws DataPersistenceException {
+        Tweet tweet = getTweetById(id);
+        
+        String sql = "DELETE FROM `mydb`.`tweet` WHERE id = ?;";
+        jdbcTemplate.update(sql, id);
+        
     }
-    */
+
+    @Override
+    public void editTweet(int id) throws DataPersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void deleteReplyById(int tweetId, int replyId) throws DataPersistenceException {
+        
+        String sql = "DELETE FROM `mydb`.`reply` WHERE tweet_id = ? AND id = ?;";
+        jdbcTemplate.update(sql,tweetId, replyId);
+    }
+
+    @Override
+    public void editReply(int id) throws DataPersistenceException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     @Override
     public Tweet getTweetById(int tweetId) throws DataPersistenceException{
@@ -109,6 +129,7 @@ public class FlockDaoImpl implements FlockDao {
         });
         return tweet;
     }
+    
     
     @Override
     public List<Tweet> getAllTweets() throws DataPersistenceException{
@@ -228,5 +249,7 @@ public class FlockDaoImpl implements FlockDao {
 
         return strings;
     }
+
+   
 
 }

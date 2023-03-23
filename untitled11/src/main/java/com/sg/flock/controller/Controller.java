@@ -18,6 +18,7 @@ import com.sg.flock.service.TweetValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -114,4 +115,24 @@ public class Controller {
             throw new DataPersistenceException("Error getting post from database.");
         }
     }
+    
+    @DeleteMapping("/posts/{tweetId}")
+    public void deleteTweetById(@PathVariable("tweetId") int tweetId) throws DataPersistenceException {
+        try{
+            sl.deleteTweetById(tweetId);
+        } catch (InvalidTweetIdException ex) {
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
+    }
+    
+    @DeleteMapping("/replies/{tweetId}/{replyId}")
+    public void deleteReplyById(@PathVariable("tweetId") int tweetId, @PathVariable("replyId") int replyId) throws DataPersistenceException {
+        try{
+            sl.deleteReplyById(tweetId, replyId);
+        } catch (InvalidTweetIdException ex) {
+            System.out.print(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
+    } 
 }

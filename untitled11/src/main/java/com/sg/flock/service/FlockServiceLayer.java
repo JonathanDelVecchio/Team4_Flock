@@ -24,6 +24,12 @@ public interface FlockServiceLayer {
     void insertReply(Reply reply) throws 
             ReplyValidationException, InvalidTweetIdException, DataPersistenceException;
 
+    void deleteTweetById(int tweetId) throws
+            InvalidTweetIdException, DataPersistenceException;
+            
+    void deleteReplyById(int tweetId, int replyId) throws
+            InvalidTweetIdException, DataPersistenceException;
+    
     public Tweet getTweetById(int tweetId) throws 
             InvalidTweetIdException, DataPersistenceException;
     
