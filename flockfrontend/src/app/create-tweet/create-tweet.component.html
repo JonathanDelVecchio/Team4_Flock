@@ -1,3 +1,5 @@
+<button (click)="toggleTweetForm()">Post Tweet</button>
+<div *ngIf="showTweetForm">
 <form (ngSubmit)="createTweet()" #tweetForm="ngForm">
   <input type="text" placeholder="Username" [(ngModel)]="tweet.user_name" name="user_name" required>
   <input type="text" placeholder="Title" [(ngModel)]="tweet.title" name="title" required>
@@ -5,3 +7,4 @@
   <input type="file" (change)="onFileSelected($event)"/>
   <button type="submit">Post Tweet</button>
 </form>
+</div>

@@ -10,6 +10,8 @@ import {TweetService} from '../services/tweet.service';
 export class CreateTweetComponent {
   tweet: Tweet = new Tweet();
   selectedFile: File | null = null;
+  showTweetForm = false;
+
 
   constructor(private tweetService: TweetService) {
   }
@@ -27,6 +29,10 @@ export class CreateTweetComponent {
       this.tweet = new Tweet();
       this.selectedFile = null;
     });
+  }
+
+  toggleTweetForm(): void {
+    this.showTweetForm = !this.showTweetForm;
   }
 
 }

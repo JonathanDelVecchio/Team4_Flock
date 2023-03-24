@@ -67,4 +67,5 @@ export class TweetHistoryComponent implements OnInit {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
+
 }

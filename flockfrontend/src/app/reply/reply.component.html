@@ -9,8 +9,8 @@
 
   <div *ngFor="let reply of replies | orderBy: 'id':true" class="reply-item">
     <div class="reply-header">
-      <span>{{ reply?.user_name }}</span>
-      <span>{{ reply?.date | date: 'MMM d, y, h:mm a z' }}</span>
+      <span>{{ reply.user_name }}</span>
+      <span>{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
     </div>
     <h3>{{ reply.title }}</h3>
     <p>{{ reply.post }}</p>
