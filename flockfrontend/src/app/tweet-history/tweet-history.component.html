@@ -1,0 +1,12 @@
+<div class="tweet-history">
+  <div *ngFor="let tweet of tweets" class="tweet">
+    <div class="tweet-header">
+      <span>{{ tweet.user_name }}</span>
+      <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
+    </div>
+    <h3>{{ tweet.title }}</h3>
+    <p>{{ tweet.post }}</p>
+    <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image" />
+    <app-reply [tweetId]="tweet.id"></app-reply>
+  </div>
+</div>
