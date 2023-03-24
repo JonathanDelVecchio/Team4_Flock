@@ -52,4 +52,8 @@ export class TweetService {
   editReplyById(tweetId: number, replyId: number, reply: Reply): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/replies/${tweetId}/${replyId}`, reply);
   }
+
+  searchTweetsByUsername(username: string): Observable<Tweet[]> {
+    return this.http.get<Tweet[]>(`${this.apiUrl}/posts/name/${username}`);
+  }
 }

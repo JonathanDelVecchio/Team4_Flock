@@ -17,7 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {OrderPipe} from './pipes/order-pipe';
-//import { SearchTweetsComponent } from './search-tweets/search-tweets.component';
+import { SearchTweetsComponent } from './search-tweets/search-tweets.component';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import {OrderPipe} from './pipes/order-pipe';
     TweetHistoryComponent,
     ReplyComponent,
     OrderPipe,
-    //SearchTweetsComponent,
+    SearchTweetsComponent,
   ],
   imports: [BrowserModule,
     FormsModule,
