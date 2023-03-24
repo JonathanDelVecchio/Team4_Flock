@@ -22,9 +22,13 @@ export class CreateTweetComponent {
 
   async createTweet() {
     if (this.selectedFile) {
-      const imageUrl = await this.tweetService.uploadImage(this.selectedFile).toPromise();
-      this.tweet.img = imageUrl;
+      try {
+        this.tweet.img = await this.readFileAsDataURL(this.selectedFile);
+      } catch (error) {
+        console.error('Error reading the file:', error);
+      }
     }
+    console.log('Sending tweet data:', this.tweet);
     this.tweetService.createTweet(this.tweet).subscribe((createdTweet) => {
       this.tweet = new Tweet();
       this.selectedFile = null;
@@ -34,6 +38,20 @@ export class CreateTweetComponent {
   toggleTweetForm(): void {
     this.showTweetForm = !this.showTweetForm;
   }
+  private async readFileAsDataURL(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
 }
 

@@ -1,10 +1,11 @@
 <div class="reply">
-  <form form *ngIf="showReplyForm" (ngSubmit)="createReply()" #replyForm="ngForm">
-    <input type="text" placeholder="Username" [(ngModel)]="reply.user_name" name="user_name" required>
+  <form *ngIf="selectedTweetId === tweetId" (ngSubmit)="createReply()" #replyForm="ngForm">
+  <input type="text" placeholder="Username" [(ngModel)]="reply.user_name" name="user_name" required>
     <input type="text" placeholder="Title" [(ngModel)]="reply.title" name="title" required>
     <textarea placeholder="Reply" [(ngModel)]="reply.post" name="post" required></textarea>
     <input type="file" (change)="onFileSelected($event)"/>
     <button type="submit">Post Reply</button>
+    <button type="button" (click)="selectedTweetId = null">Cancel</button>
   </form>
 
   <div *ngFor="let reply of replies | orderBy: 'id':true" class="reply-item">
@@ -15,6 +16,7 @@
     <h3>{{ reply.title }}</h3>
     <p>{{ reply.post }}</p>
     <img *ngIf="reply.img" [src]="reply.img" alt="Reply image"/>
+
     <button mat-button (click)="deleteReply(reply.id)">Delete</button>
     <button mat-button (click)="toggleEditMode(reply)">Edit</button>
 

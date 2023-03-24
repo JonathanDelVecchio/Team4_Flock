@@ -14,6 +14,8 @@ export class TweetHistoryComponent implements OnInit {
   tweets: Tweet[] = [];
   editTweetForm!: FormGroup;
   selectedFile: File | null = null;
+  selectedTweetId: number | null = null;
+
 
   @ViewChild(ReplyComponent) replyComponent!: ReplyComponent;
 
@@ -60,8 +62,8 @@ export class TweetHistoryComponent implements OnInit {
     tweet.editMode = false;
   }
 
-  toggleReplyForm() {
-    this.replyComponent.showReplyForm = !this.replyComponent.showReplyForm;
+  toggleReplyForm(tweetId: number): void {
+    this.selectedTweetId = this.selectedTweetId === tweetId ? null : tweetId;
   }
 
   onFileSelected(event: any) {

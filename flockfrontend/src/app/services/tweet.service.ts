@@ -56,4 +56,8 @@ export class TweetService {
   searchTweetsByUsername(username: string): Observable<Tweet[]> {
     return this.http.get<Tweet[]>(`${this.apiUrl}/posts/name/${username}`);
   }
+
+  searchRepliesByUserName(user_name: string): Observable<Reply[]> {
+    return this.http.get<Reply[]>(`${this.apiUrl}/replies/name/${user_name}`);
+  }
 }

@@ -9,7 +9,7 @@
     <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image"/>
     <button mat-button (click)="deleteTweet(tweet.id)">Delete</button>
     <button mat-button (click)="toggleEditMode(tweet)">Edit</button>
-    <button mat-button (click)="toggleReplyForm()">Reply</button>
+    <button mat-button (click)="toggleReplyForm(selectedTweetId ? selectedTweetId : tweet.id)">Reply</button>
 
     <form *ngIf="tweet.editMode" [formGroup]="editTweetForm">
       <input formControlName="title" [(ngModel)]="tweet.title" placeholder="Title"/>
@@ -19,6 +19,6 @@
         <button (click)="saveChanges(tweet)">Save</button>
       </div>
     </form>
-    <app-reply [tweetId]="tweet.id"></app-reply>
+    <app-reply [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>
   </div>
 </div>

@@ -16,6 +16,8 @@ export class ReplyComponent implements OnInit {
   selectedFile: File | null = null;
   editReplyForm!: FormGroup;
   showReplyForm = false;
+  @Input() selectedTweetId: number | null = null;
+
 
 
   constructor(private tweetService: TweetService, private dialog: MatDialog, private fb: FormBuilder) {
@@ -42,15 +44,19 @@ export class ReplyComponent implements OnInit {
 
   async createReply() {
     if (this.selectedFile) {
-      const imageUrl = await this.tweetService.uploadImage(this.selectedFile).toPromise();
-      this.reply.img = imageUrl;
+      try {
+        this.reply.img = await this.readFileAsDataURL(this.selectedFile);
+      } catch (error) {
+        console.error('Error reading the file:', error);
+      }
     }
     this.reply.tweet_id = this.tweetId;
     console.log('Reply object before sending to back-end:', this.reply);
     this.tweetService.createReply(this.reply).subscribe((createdReply) => {
-      this.replies.push(createdReply);
+      this.loadReplies();
       this.reply = new Reply();
       this.selectedFile = null;
+      this.selectedTweetId = null
     });
   }
 
@@ -66,6 +72,9 @@ export class ReplyComponent implements OnInit {
       reply: ['', Validators.required],
     });
   }
+  showReplyFormForTweet(tweetId: number): void {
+    this.selectedTweetId = tweetId;
+  }
 
   toggleEditMode(reply: Reply): void {
     reply.editMode = !reply.editMode;
@@ -77,5 +86,20 @@ export class ReplyComponent implements OnInit {
       this.loadReplies();
     });
     reply.editMode = false;
+  }
+  private async readFileAsDataURL(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
   }
 }
