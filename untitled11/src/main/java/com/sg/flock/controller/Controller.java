@@ -10,6 +10,8 @@ import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dto.Reply;
 import com.sg.flock.dto.Tweet;
 import com.sg.flock.service.FlockServiceLayer;
+
+import java.util.Collections;
 import java.util.List;
 
 import com.sg.flock.service.FlockServiceLayerImpl;
@@ -87,7 +89,9 @@ public class Controller {
 
     @GetMapping("/posts")
     public List<Tweet> getAllPosts() throws DataPersistenceException {
-        return sl.getAllTweets();
+        List<Tweet> ret = sl.getAllTweets();
+        Collections.reverse(ret);
+        return ret;
     }
 
     @GetMapping("/replies/{tweetId}")
