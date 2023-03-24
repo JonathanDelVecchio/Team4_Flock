@@ -13,4 +13,17 @@
       font-size: 0.9rem;
     }
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input,
+    textarea {
+      border-radius: 5px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      padding: 5px;
+    }
+  }
 }

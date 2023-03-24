@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Tweet } from '../models/tweet';
-import { TweetService } from '../services/tweet.service';
+import {Component} from '@angular/core';
+import {Tweet} from '../models/tweet';
+import {TweetService} from '../services/tweet.service';
 
 @Component({
   selector: 'app-create-tweet',
@@ -11,7 +11,8 @@ export class CreateTweetComponent {
   tweet: Tweet = new Tweet();
   selectedFile: File | null = null;
 
-  constructor(private tweetService: TweetService) {}
+  constructor(private tweetService: TweetService) {
+  }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];

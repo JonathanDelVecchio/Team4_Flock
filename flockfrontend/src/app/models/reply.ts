@@ -6,4 +6,5 @@ export class Reply {
   post!: string;
   img?: string;
   date!: string;
+  editMode?: boolean;
 }

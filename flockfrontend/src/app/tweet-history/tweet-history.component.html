@@ -6,7 +6,19 @@
     </div>
     <h3>{{ tweet.title }}</h3>
     <p>{{ tweet.post }}</p>
-    <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image" />
+    <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image"/>
+    <button mat-button (click)="deleteTweet(tweet.id)">Delete</button>
+    <button mat-button (click)="toggleEditMode(tweet)">Edit</button>
+    <button mat-button (click)="toggleReplyForm()">Reply</button>
+
+    <form *ngIf="tweet.editMode" [formGroup]="editTweetForm">
+      <input formControlName="title" [(ngModel)]="tweet.title" placeholder="Title"/>
+      <textarea formControlName="tweet" [(ngModel)]="tweet.post" placeholder="Tweet"></textarea>
+      <div>
+        <input type="file" (change)="onFileSelected($event)"/>
+        <button (click)="saveChanges(tweet)">Save</button>
+      </div>
+    </form>
     <app-reply [tweetId]="tweet.id"></app-reply>
   </div>
 </div>

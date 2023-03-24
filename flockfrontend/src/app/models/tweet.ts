@@ -5,4 +5,5 @@ export class Tweet {
   post!: string;
   img?: string;
   date!: string;
+  editMode?: boolean;
 }
