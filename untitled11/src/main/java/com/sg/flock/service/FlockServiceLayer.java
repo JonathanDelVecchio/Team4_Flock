@@ -39,6 +39,12 @@ public interface FlockServiceLayer {
     public Tweet getTweetById(int tweetId) throws 
             InvalidTweetIdException, DataPersistenceException;
     
+    public List<Tweet> getTweetByUserName(String user_name) throws 
+            InvalidTweetIdException, DataPersistenceException;
+    
+    public List<Reply> getReplyByUserName(String user_name) throws 
+            InvalidTweetIdException, DataPersistenceException;
+    
     List<Tweet> getAllTweets() throws DataPersistenceException;
     
     List<Reply> getAllReplies() throws DataPersistenceException;

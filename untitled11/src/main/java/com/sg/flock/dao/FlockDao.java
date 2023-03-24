@@ -32,6 +32,10 @@ public interface FlockDao {
     
     public Tweet getTweetById(int tweetId) throws DataPersistenceException;
     
+    public List<Tweet> getTweetByUserName(String user_name) throws DataPersistenceException;
+    
+    public List<Reply> getReplyByUserName(String user_name) throws DataPersistenceException;
+    
     List<Tweet> getAllTweets() throws DataPersistenceException;
     
     List<Reply> getAllReplies() throws DataPersistenceException;

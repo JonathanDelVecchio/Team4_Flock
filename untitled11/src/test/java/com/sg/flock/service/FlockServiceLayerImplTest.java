@@ -113,7 +113,6 @@ public class FlockServiceLayerImplTest {
         assertEquals(reply.getDate(), fetchedReply.getDate());
     }
 
-
     @Test
     public void testDeleteTweet() throws Exception {
         
@@ -208,5 +207,37 @@ public class FlockServiceLayerImplTest {
         assertEquals(1, replies.size());
     }
     
+    @Test
+    public void testGetTweetByUserName() throws Exception {
+        //Create tweet for testing
+        Tweet tweet = new Tweet();
+        
+        tweet.setUser_name("Nicka");
+        tweet.setTitle("Food");
+        tweet.setPost("What is your food recommendations?");
+        tweet.setImg("food pic");
+        
+        service.insertTweet(tweet);
+        
+        List<Tweet> tweets = service.getTweetByUserName("Nick");
+        assertEquals(1, tweets.size());
+        
+    }
     
+    @Test
+    public void testGetReplyByUserName() throws Exception {
+        //Create reply for testing
+        Reply reply = new Reply();
+        reply.setTweetId(1);
+        reply.setUserName("Barrya");
+        reply.setTitle("salty");
+        reply.setPost("The fried chicken is too salty");
+        reply.setImg("food pic");
+        
+        service.insertReply(reply);
+        
+        List<Reply> replies = service.getReplyByUserName("Barry");
+        assertEquals(1, replies.size());
+        
+    }
 }

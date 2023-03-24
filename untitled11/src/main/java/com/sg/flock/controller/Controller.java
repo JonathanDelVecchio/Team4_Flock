@@ -32,20 +32,20 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author nicho
  */
-
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api")
 public class Controller {
+
     /*
       @Autowired
       FlockDao dao;
-      */
+     */
     FlockServiceLayer sl;
 
     @Autowired
     public Controller(FlockServiceLayer flockServiceLayer) {
-        this.sl=flockServiceLayer;
+        this.sl = flockServiceLayer;
     }
 
     @PostMapping("/posts")
@@ -92,15 +92,15 @@ public class Controller {
     }
 
     @GetMapping("/posts")
-    public List<Tweet> getAllPosts() throws DataPersistenceException{
+    public List<Tweet> getAllPosts() throws DataPersistenceException {
         return sl.getAllTweets();
     }
 
     @GetMapping("/replies/{tweetId}")
-    public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) throws DataPersistenceException{
-        try{
+    public List<Reply> getAllReplies(@PathVariable("tweetId") int tweetId) throws DataPersistenceException {
+        try {
             return sl.getRepliesForTweetId(tweetId);
-        } catch (InvalidTweetIdException ex){
+        } catch (InvalidTweetIdException ex) {
             System.out.println(ex.getMessage());
             throw new DataPersistenceException("Error getting replies from database.");
         }
@@ -108,9 +108,29 @@ public class Controller {
 
     @GetMapping("/posts/{tweetId}")
     public Tweet getTweetById(@PathVariable("tweetId") int tweetId) throws DataPersistenceException {
-        
-        try{
+
+        try {
             return sl.getTweetById(tweetId);
+        } catch (InvalidTweetIdException ex) {
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
+    }
+
+    @GetMapping("/posts/name/{user_name}")
+    public List<Tweet> getTweetByUserName(@PathVariable ("user_name") String user_name) throws DataPersistenceException {
+        try {
+            return sl.getTweetByUserName(user_name);
+        } catch (InvalidTweetIdException ex) {
+            System.out.println(ex.getMessage());
+            throw new DataPersistenceException("Error getting post from database.");
+        }
+    }
+
+    @GetMapping("/replies/name/{user_name}")
+    public List<Reply> getReplyByUserName(@PathVariable ("user_name") String user_name) throws DataPersistenceException {
+        try {
+            return sl.getReplyByUserName(user_name);
         } catch (InvalidTweetIdException ex) {
             System.out.println(ex.getMessage());
             throw new DataPersistenceException("Error getting post from database.");
@@ -119,41 +139,41 @@ public class Controller {
     
     @DeleteMapping("/posts/{tweetId}")
     public void deleteTweetById(@PathVariable("tweetId") int tweetId) throws DataPersistenceException {
-        try{
+        try {
             sl.deleteTweetById(tweetId);
         } catch (InvalidTweetIdException ex) {
             System.out.println(ex.getMessage());
             throw new DataPersistenceException("Error getting post from database.");
         }
     }
-    
+
     @DeleteMapping("/replies/{tweetId}/{replyId}")
     public void deleteReplyById(@PathVariable("tweetId") int tweetId, @PathVariable("replyId") int replyId) throws DataPersistenceException {
-        try{
+        try {
             sl.deleteReplyById(tweetId, replyId);
         } catch (InvalidTweetIdException ex) {
             System.out.print(ex.getMessage());
             throw new DataPersistenceException("Error getting post from database.");
         }
-    } 
-    
+    }
+
     @PutMapping("/posts/{tweetId}")
     public void editTweetById(@PathVariable("tweetId") int tweetId, @RequestBody Tweet tweet) throws DataPersistenceException {
-        try{
+        try {
             sl.editTweetById(tweetId, tweet);
         } catch (InvalidTweetIdException ex) {
             System.out.print(ex.getMessage());
             throw new DataPersistenceException("Error getting post from database.");
         }
     }
-    
+
     @PutMapping("/replies/{tweetId}/{replyId}")
     public void editReplyById(@PathVariable("tweetId") int tweetId, @PathVariable("replyId") int replyId, @RequestBody Reply reply) throws DataPersistenceException {
-        try{
+        try {
             sl.editReplyById(tweetId, replyId, reply);
         } catch (InvalidTweetIdException ex) {
             System.out.print(ex.getMessage());
             throw new DataPersistenceException("Error getting post from database.");
         }
-    } 
+    }
 }
