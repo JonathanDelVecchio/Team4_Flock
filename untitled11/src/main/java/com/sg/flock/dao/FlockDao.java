@@ -37,4 +37,9 @@ public interface FlockDao {
     List<Reply> getAllReplies() throws DataPersistenceException;
     
     List<Reply> getRepliesForTweetId(int tweetId) throws DataPersistenceException;
+    
+    public void clearReplyTable();
+    
+    public void clearTweetTable();           
+            
 }

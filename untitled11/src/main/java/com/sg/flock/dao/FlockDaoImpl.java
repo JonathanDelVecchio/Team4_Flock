@@ -272,6 +272,25 @@ public class FlockDaoImpl implements FlockDao {
         return strings;
     }
 
-   
+    @Override
+    public void clearReplyTable(){
+        //Clear Reply table
+        final String sql = "DELETE FROM reply where id > 0";
+        jdbcTemplate.update(sql);
+
+        final String resetAutoIncrementSql = "ALTER TABLE reply AUTO_INCREMENT = 1";
+        jdbcTemplate.update(resetAutoIncrementSql);
+        
+    }
+    
+    @Override
+    public void clearTweetTable(){ 
+        //Clear Tweet table
+        final String sql = "DELETE FROM tweet where id > 0";
+        jdbcTemplate.update(sql);
+
+        final String resetAutoIncrementSql = "ALTER TABLE tweet AUTO_INCREMENT = 1";
+        jdbcTemplate.update(resetAutoIncrementSql);
+    }
 
 }

@@ -29,8 +29,11 @@ public class FlockServiceLayerImplTest {
     
     @BeforeEach
     public void setUp() throws Exception{
-
+        //Clear tables
+        service.clearReplyTable();
+        service.clearTweetTable();        
         
+        //Create tweet for testing
         Tweet tweet = new Tweet();
         
         tweet.setUser_name("Nick");
@@ -41,6 +44,7 @@ public class FlockServiceLayerImplTest {
         
         service.insertTweet(tweet);
         
+        //Create reply for testing
         Reply reply = new Reply();
         reply.setTweetId(1);
         reply.setUserName("Barry");
@@ -72,11 +76,9 @@ public class FlockServiceLayerImplTest {
         
         service.insertTweet(tweet);
         // Fetch the inserted tweet and check that it matches the original tweet
-        int num = service.getAllTweets().size() + 1;
+        int num = service.getAllTweets().size();
         
         Tweet fetchedTweet = service.getTweetById(num);
-
-
         
         assertNotNull(fetchedTweet);
         assertEquals(tweet.getUser_name(), fetchedTweet.getUser_name());
@@ -194,7 +196,7 @@ public class FlockServiceLayerImplTest {
     public void testGetAllTweets() throws Exception {
         List<Tweet> tweets = service.getAllTweets();
         
-        assertEquals(10, tweets.size());
+        assertEquals(1, tweets.size());
     }
 
     /**
@@ -203,7 +205,7 @@ public class FlockServiceLayerImplTest {
     @Test
     public void testGetRepliesForTweetId() throws Exception {
         List<Reply> replies = service.getRepliesForTweetId(1);
-        assertEquals(6, replies.size());
+        assertEquals(1, replies.size());
     }
     
     

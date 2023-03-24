@@ -46,4 +46,8 @@ public interface FlockServiceLayer {
     List<Reply> getRepliesForTweetId(int tweetId) throws 
             InvalidTweetIdException, DataPersistenceException;
     
+    public void clearReplyTable();
+    
+    public void clearTweetTable();
+    
 }

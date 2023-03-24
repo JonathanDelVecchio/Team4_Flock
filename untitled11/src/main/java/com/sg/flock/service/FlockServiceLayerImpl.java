@@ -91,4 +91,13 @@ public class FlockServiceLayerImpl implements FlockServiceLayer{
         return dao.getRepliesForTweetId(tweetId);
     }
     
+    @Override
+    public void clearReplyTable(){
+        dao.clearReplyTable();
+    }
+    
+    @Override
+    public void clearTweetTable(){
+        dao.clearTweetTable();
+    }
 }
