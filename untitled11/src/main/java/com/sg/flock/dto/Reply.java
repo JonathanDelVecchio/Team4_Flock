@@ -1,5 +1,8 @@
 package com.sg.flock.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
 public class Reply {
     public int getId() {
         return id;
@@ -57,12 +60,19 @@ public class Reply {
         this.date = date;
     }
 
+    @JsonProperty("id")
     int id;
+    @JsonProperty("tweet_id")
     int tweet_id;
+    @JsonProperty("user_name")
     String user_name;
+    @JsonProperty("title")
     String title;
+    @JsonProperty("post")
     String post;
+    @JsonProperty("img")
     String img;
+    @JsonProperty("date")
     String date;
 
 }

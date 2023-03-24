@@ -1,16 +1,23 @@
 package com.sg.flock.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sg.flock.dto.Reply;
 
 import java.util.LinkedList;
 
 public class Tweet {
 
+    @JsonProperty("id")
     int id;
+    @JsonProperty("user_name")
     String user_name;
+    @JsonProperty("title")
     String title;
+    @JsonProperty("post")
     String post;
+    @JsonProperty("img")
     String img;
+    @JsonProperty("date")
     String date;
 
 
