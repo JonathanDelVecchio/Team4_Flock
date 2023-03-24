@@ -4,6 +4,7 @@
  */
 package com.sg.flock.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sg.flock.dao.DataPersistenceException;
 import com.sg.flock.dao.FlockDao;
 import com.sg.flock.dto.Reply;
@@ -15,6 +16,7 @@ import com.sg.flock.service.FlockServiceLayerImpl;
 import com.sg.flock.service.InvalidTweetIdException;
 import com.sg.flock.service.ReplyValidationException;
 import com.sg.flock.service.TweetValidationException;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,14 +53,6 @@ public class Controller {
     @PostMapping("/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public void createPost(@RequestBody Tweet tweet) throws DataPersistenceException, TweetValidationException {
-        // Perform validation checks on the tweet object
-//        if (tweet.getPost() == null || tweet.getPost().isEmpty()) {
-//            throw new TweetValidationException("Tweet message cannot be empty");
-//        }
-//        if (tweet.getPost().length() > 280) {
-//            throw new TweetValidationException("Tweet message length cannot exceed 280 characters");
-//        }
-
         try {
             // Insert the tweet into the database
             sl.insertTweet(tweet);

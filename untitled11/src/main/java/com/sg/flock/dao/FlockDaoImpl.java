@@ -35,24 +35,24 @@ public class FlockDaoImpl implements FlockDao {
 
         jdbcTemplate.execute("USE " + dbName);
 
-        String roundTableSql = "CREATE TABLE IF NOT EXISTS `mydb`.`tweet` (\n"
+        String tweetTableSql = "CREATE TABLE IF NOT EXISTS `mydb`.`tweet` (\n"
                 + "  `id` INT NOT NULL AUTO_INCREMENT,\n"
                 + "  `user_name` VARCHAR(300) NOT NULL,\n"
                 + "  `title` TEXT NULL,\n"
                 + "  `post` TEXT NULL,\n"
-                + "  `img` TEXT NULL,\n"
+                + "  `img` LONGTEXT NULL,\n"
                 + "  `date` TEXT NULL,\n"
                 + "  PRIMARY KEY (`id`))\n"
                 + "ENGINE = InnoDB;";
-        jdbcTemplate.execute(roundTableSql);
+        jdbcTemplate.execute(tweetTableSql);
 
-        String gameTableSql = "CREATE TABLE IF NOT EXISTS `mydb`.`reply` (\n"
+        String replyTableSql = "CREATE TABLE IF NOT EXISTS `mydb`.`reply` (\n"
                 + "  `id` INT NOT NULL AUTO_INCREMENT,\n"
                 + "  `tweet_id` INT NOT NULL,\n"
                 + "  `user_name` VARCHAR(300) NULL,\n"
                 + "  `title` TEXT NULL,\n"
                 + "  `post` TEXT NULL,\n"
-                + "  `img` TEXT NULL,\n"
+                + "  `img` LONGTEXT NULL,\n"
                 + "  `date` TEXT NULL,\n"
                 + "  PRIMARY KEY (`id`),\n"
                 + "  INDEX `key_idx` (`tweet_id` ASC),\n"
@@ -61,7 +61,7 @@ public class FlockDaoImpl implements FlockDao {
                 + "    REFERENCES `mydb`.`tweet` (`id`)\n"
                 + "    ON DELETE CASCADE\n"
                 + " ) ENGINE = InnoDB;";
-        jdbcTemplate.execute(gameTableSql);
+        jdbcTemplate.execute(replyTableSql);
 
         System.out.println("Tables created successfully.");
     }
