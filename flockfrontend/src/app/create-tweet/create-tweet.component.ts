@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {Tweet} from '../models/tweet';
 import {TweetService} from '../services/tweet.service';
 
@@ -11,6 +11,7 @@ export class CreateTweetComponent {
   tweet: Tweet = new Tweet();
   selectedFile: File | null = null;
   showTweetForm = false;
+
 
 
   constructor(private tweetService: TweetService) {

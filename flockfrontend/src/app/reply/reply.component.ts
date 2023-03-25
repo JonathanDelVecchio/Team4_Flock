@@ -80,10 +80,18 @@ export class ReplyComponent implements OnInit {
     reply.editMode = !reply.editMode;
   }
 
-  saveChanges(reply: Reply): void {
+  async saveChanges(reply: Reply): Promise<void> {
+    if (this.selectedFile) {
+      try {
+        reply.img = await this.readFileAsDataURL(this.selectedFile);
+      } catch (error) {
+        console.error('Error reading the file:', error);
+      }
+    }
     this.tweetService.editReplyById(this.tweetId, reply.id, reply).subscribe(() => {
       // Refresh the replies list after editing
       this.loadReplies();
+      this.selectedFile = null;
     });
     reply.editMode = false;
   }

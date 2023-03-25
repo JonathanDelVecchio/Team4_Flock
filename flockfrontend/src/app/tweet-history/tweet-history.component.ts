@@ -23,7 +23,8 @@ export class TweetHistoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadTweets()
+    console.log('TweetHistoryComponent ngOnInit called');
+    this.loadTweets();
     this.initEditTweetForm();
   }
 
@@ -34,6 +35,7 @@ export class TweetHistoryComponent implements OnInit {
   }
 
   loadTweets() {
+    console.log('Loading tweets...');
     this.tweetService.getAllTweets().subscribe((tweets) => {
       this.tweets = tweets;
 
@@ -54,10 +56,18 @@ export class TweetHistoryComponent implements OnInit {
     tweet.editMode = !tweet.editMode;
   }
 
-  saveChanges(tweet: Tweet): void {
+  async saveChanges(tweet: Tweet): Promise <void> {
+    if (this.selectedFile) {
+      try {
+        tweet.img = await this.readFileAsDataURL(this.selectedFile);
+      } catch (error) {
+        console.error('Error reading the file:', error);
+      }
+    }
     this.tweetService.editTweetById(tweet.id!, tweet).subscribe(() => {
       // Refresh the tweets list after editing
       this.loadTweets();
+      this.selectedFile = null;
     });
     tweet.editMode = false;
   }
@@ -69,5 +79,19 @@ export class TweetHistoryComponent implements OnInit {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
+  private async readFileAsDataURL(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
+      reader.onload = () => {
+        resolve(reader.result as string);
+      };
+
+      reader.onerror = (error) => {
+        reject(error);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  }
 }
