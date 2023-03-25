@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Output, Input} from '@angular/core';
 import {Tweet} from '../models/tweet';
 import {TweetService} from '../services/tweet.service';
 
@@ -10,8 +10,8 @@ import {TweetService} from '../services/tweet.service';
 export class CreateTweetComponent {
   tweet: Tweet = new Tweet();
   selectedFile: File | null = null;
-  showTweetForm = false;
-
+  @Output() tweetCreated = new EventEmitter<void>();
+  @Input() showTweetForm = false;
 
 
   constructor(private tweetService: TweetService) {
@@ -33,12 +33,11 @@ export class CreateTweetComponent {
     this.tweetService.createTweet(this.tweet).subscribe((createdTweet) => {
       this.tweet = new Tweet();
       this.selectedFile = null;
+      this.tweetCreated.emit();
     });
   }
 
-  toggleTweetForm(): void {
-    this.showTweetForm = !this.showTweetForm;
-  }
+
   private async readFileAsDataURL(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

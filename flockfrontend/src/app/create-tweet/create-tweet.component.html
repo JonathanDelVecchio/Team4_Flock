@@ -1,5 +1,4 @@
-<button (click)="toggleTweetForm()">Post Tweet</button>
-<div *ngIf="showTweetForm">
+<div *ngIf="showTweetForm" (click)="$event.stopPropagation()">
 <form (ngSubmit)="createTweet()" #tweetForm="ngForm">
   <input type="text" placeholder="Username" [(ngModel)]="tweet.user_name" name="user_name" required>
   <input type="text" placeholder="Title" [(ngModel)]="tweet.title" name="title" required>

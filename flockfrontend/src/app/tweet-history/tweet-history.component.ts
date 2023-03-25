@@ -15,6 +15,8 @@ export class TweetHistoryComponent implements OnInit {
   editTweetForm!: FormGroup;
   selectedFile: File | null = null;
   selectedTweetId: number | null = null;
+  showCreateTweetForm = false;
+
 
 
   @ViewChild(ReplyComponent) replyComponent!: ReplyComponent;
@@ -79,6 +81,11 @@ export class TweetHistoryComponent implements OnInit {
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
+
+  toggleCreateTweetForm(): void {
+    this.showCreateTweetForm = !this.showCreateTweetForm;
+  }
+
   private async readFileAsDataURL(file: File): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -94,4 +101,5 @@ export class TweetHistoryComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
+
 }
