@@ -21,7 +21,7 @@ public class FlockDaoImpl implements FlockDao {
 
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private final String user = "root";
-    private final String pass = "uuuu";
+    private final String pass = "9toy[YwV]R*68WvWG";
     private final String dbName = "mydb";
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     DataSource dataSource = DataSourceFactory.createDataSource();
