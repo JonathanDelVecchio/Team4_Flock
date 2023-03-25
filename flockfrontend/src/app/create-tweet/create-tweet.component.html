@@ -5,5 +5,7 @@
   <textarea placeholder="Post" [(ngModel)]="tweet.post" name="post" required></textarea>
   <input type="file" (change)="onFileSelected($event)"/>
   <button type="submit">Post Tweet</button>
+  <button type="button" (click)="showTweetForm = false">Cancel</button>
+
 </form>
 </div>
