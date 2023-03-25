@@ -1,0 +1,24 @@
+<div class="tweet-history">
+  <div *ngFor="let tweet of tweets" class="tweet">
+    <div class="tweet-header">
+      <span>{{ tweet.user_name }}</span>
+      <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
+    </div>
+    <h3>{{ tweet.title }}</h3>
+    <p>{{ tweet.post }}</p>
+    <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image"/>
+    <button mat-button (click)="deleteTweet(tweet.id)">Delete</button>
+    <button mat-button (click)="toggleEditMode(tweet)">Edit</button>
+    <button mat-button (click)="toggleReplyForm(selectedTweetId ? selectedTweetId : tweet.id)">Reply</button>
+
+    <form *ngIf="tweet.editMode" [formGroup]="editTweetForm">
+      <input formControlName="title" [(ngModel)]="tweet.title" placeholder="Title"/>
+      <textarea formControlName="tweet" [(ngModel)]="tweet.post" placeholder="Tweet"></textarea>
+      <div>
+        <input type="file" (change)="onFileSelected($event)"/>
+        <button (click)="saveChanges(tweet)">Save</button>
+      </div>
+    </form>
+    <app-reply [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>
+  </div>
+</div>

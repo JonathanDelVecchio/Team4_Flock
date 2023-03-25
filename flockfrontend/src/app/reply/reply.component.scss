@@ -1,0 +1,29 @@
+.reply {
+  .reply-item {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    .reply-header {
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input,
+    textarea {
+      border-radius: 5px;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      padding: 5px;
+    }
+  }
+}
