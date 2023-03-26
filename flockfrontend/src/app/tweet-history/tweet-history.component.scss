@@ -26,4 +26,26 @@
       padding: 5px;
     }
   }
+
+  .toggle-tweet-form {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #1DA1F2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .toggle-tweet-form:hover {
+    background-color: #0c87b8;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
 }

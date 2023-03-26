@@ -1,7 +1,6 @@
-<button (click)="toggleCreateTweetForm()">Post Tweet</button>
-<app-create-tweet (tweetCreated)="loadTweets()" (click)="toggleCreateTweetForm()" [showTweetForm]="showCreateTweetForm"></app-create-tweet>
-
 <div class="tweet-history">
+<button *ngIf="!showCreateTweetForm" (click)="showCreateTweetForm = !showCreateTweetForm" class="toggle-tweet-form">Post Tweet</button>
+<app-create-tweet (tweetCreated)="loadTweets()" (tweetCanceled)="showCreateTweetForm = false" [showTweetForm]="showCreateTweetForm"></app-create-tweet>
   <div *ngFor="let tweet of tweets" class="tweet">
     <div class="tweet-header">
       <span>{{ tweet.user_name }}</span>

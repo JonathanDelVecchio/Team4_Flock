@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Output, Input} from '@angular/core';
+import {Component, EventEmitter, Output, Input, ViewChild} from '@angular/core';
 import {Tweet} from '../models/tweet';
 import {TweetService} from '../services/tweet.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-create-tweet',
@@ -12,14 +13,23 @@ export class CreateTweetComponent {
   selectedFile: File | null = null;
   @Output() tweetCreated = new EventEmitter<void>();
   @Input() showTweetForm = false;
+  @Output() tweetCanceled = new EventEmitter<void>();
   imageData: string = '';
+  @ViewChild('tweetFormRef') tweetFormRef!: NgForm;
+
 
 
 
   constructor(private tweetService: TweetService) {
   }
 
-
+  onCancel() {
+    this.tweet = new Tweet();
+    this.selectedFile = null;
+    this.imageData = '';
+    this.tweetCanceled.emit();
+    this.tweetFormRef.resetForm();
+  }
 
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -49,7 +59,10 @@ export class CreateTweetComponent {
     this.tweetService.createTweet(this.tweet).subscribe((createdTweet) => {
       this.tweet = new Tweet();
       this.selectedFile = null;
+      this.selectedFile = null;
+      this.imageData = '';
       this.tweetCreated.emit();
+      this.tweetCanceled.emit();
     });
   }
 
@@ -68,6 +81,9 @@ export class CreateTweetComponent {
 
       reader.readAsDataURL(file);
     });
+  }
+  resetForm() {
+    this.tweetFormRef.resetForm();
   }
 }
 
