@@ -1,51 +1,114 @@
+//.tweet-history {
+//  .tweet {
+//    font-family: 'Helvetica Neue', Arial, sans-serif;
+//    padding: 10px;
+//    border: 1px solid #ccc;
+//    margin-bottom: 10px;
+//    border-radius: 20px;
+//
+//    .tweet-header {
+//      font-family: 'Helvetica Neue', Arial, sans-serif;
+//      display: flex;
+//      justify-content: space-between;
+//      font-size: 0.9rem;
+//    }
+//  }
+//
+//  form {
+//    display: flex;
+//    flex-direction: column;
+//    gap: 10px;
+//
+//    input,
+//    textarea {
+//      border-radius: 5px;
+//      font-family: 'Helvetica Neue', Arial, sans-serif;
+//      padding: 5px;
+//    }
+//  }
+//
+//  .toggle-tweet-form {
+//    font-family: 'Helvetica Neue', Arial, sans-serif;
+//    background-color: #1DA1F2;
+//    color: white;
+//    border: none;
+//    border-radius: 20px;
+//    padding: 10px 20px;
+//    font-size: 1.2rem;
+//    font-weight: bold;
+//    cursor: pointer;
+//    transition: all 0.3s ease;
+//    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//    text-align: center;
+//    display: block;
+//    margin: 0 auto;
+//  }
+//
+//  .toggle-tweet-form:hover {
+//    background-color: #0c87b8;
+//    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+//  }
+//}
 .tweet-history {
-  .tweet {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    border-radius: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-    .tweet-header {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.9rem;
-    }
+.toggle-tweet-form {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.tweet {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  img {
+    max-width: 800px;
+    height: auto;
   }
+}
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.tweet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
-    input,
-    textarea {
-      border-radius: 5px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      padding: 5px;
-    }
-  }
+.tweet-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
-  .toggle-tweet-form {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #1DA1F2;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    display: block;
-    margin: 0 auto;
-  }
+.edit-tweet-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 
-  .toggle-tweet-form:hover {
-    background-color: #0c87b8;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  }
+.file-and-save {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input, textarea {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
 }

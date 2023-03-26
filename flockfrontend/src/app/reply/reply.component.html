@@ -15,8 +15,7 @@
     </div>
     <h3>{{ reply.title }}</h3>
     <p>{{ reply.post }}</p>
-    <img *ngIf="reply.img" [src]="reply.img" alt="Reply image"/>
-
+    <img *ngIf="reply.img" [src]="reply.img" alt="Reply image" class="reply-image"/>
     <button mat-button (click)="deleteReply(reply.id)">Delete</button>
     <button mat-button (click)="toggleEditMode(reply)">Edit</button>
 
@@ -31,4 +30,4 @@
 
   </div>
 </div>
-
+remember my 800px image rule

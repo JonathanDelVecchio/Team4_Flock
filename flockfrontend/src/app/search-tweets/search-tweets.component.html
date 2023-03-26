@@ -1,32 +1,65 @@
-<div>
+<!--<div>-->
+<!--  <input [(ngModel)]="searchQuery" placeholder="Search by username" />-->
+<!--  <button (click)="searchAll()">Search</button>-->
+<!--  <button *ngIf="searchedTweets.length || searchedReplies.length" (click)="closeSearch()">Close</button>-->
+<!--</div>-->
+<!---->
+<!---->
+<!--<div class="searched-tweets" *ngIf="searchedTweets.length">-->
+<!--  <h2>Tweets</h2>-->
+<!--<div *ngFor="let tweet of searchedTweets" class="searched-tweets">-->
+<!--  <div class="tweet-header">-->
+<!--    <span>{{ tweet.user_name }}</span>-->
+<!--    <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>-->
+<!--  </div>-->
+<!--  <h3>{{ tweet.title }}</h3>-->
+<!--  <p>{{ tweet.post }}</p>-->
+<!--  <img *ngIf="tweet.img" [src]="tweet.img" alt="Reply image" />-->
+<!--</div>-->
+<!--</div>-->
+<!---->
+<!--<div class="searched-replies" *ngIf="searchedReplies.length">-->
+<!--  <h2>Replies</h2>-->
+<!--  <div *ngFor="let reply of searchedReplies" class="searched-reply">-->
+<!--    <div class="reply-header">-->
+<!--      <span>{{ reply.user_name }}</span>-->
+<!--      <span>{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>-->
+<!--    </div>-->
+<!--    <h3>{{ reply.title }}</h3>-->
+<!--    <p>{{ reply.post }}</p>-->
+<!--    <img *ngIf="reply.img" [src]="reply.img" alt="Reply image" />-->
+<!--  </div>-->
+<!--</div>-->
+<div class="search-container">
   <input [(ngModel)]="searchQuery" placeholder="Search by username" />
   <button (click)="searchAll()">Search</button>
   <button *ngIf="searchedTweets.length || searchedReplies.length" (click)="closeSearch()">Close</button>
 </div>
 
-
-<div class="searched-tweets" *ngIf="searchedTweets.length">
-  <h2>Tweets</h2>
-<div *ngFor="let tweet of searchedTweets" class="searched-tweets">
-  <div class="tweet-header">
-    <span>{{ tweet.user_name }}</span>
-    <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
-  </div>
-  <h3>{{ tweet.title }}</h3>
-  <p>{{ tweet.post }}</p>
-  <img *ngIf="tweet.img" [src]="tweet.img" alt="Reply image" />
-</div>
-</div>
-
-<div class="searched-replies" *ngIf="searchedReplies.length">
-  <h2>Replies</h2>
-  <div *ngFor="let reply of searchedReplies" class="searched-reply">
-    <div class="reply-header">
-      <span>{{ reply.user_name }}</span>
-      <span>{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
+<div class="results-container">
+  <div class="searched-tweets" *ngIf="searchedTweets.length">
+    <h2>Tweets</h2>
+    <div *ngFor="let tweet of searchedTweets" class="tweet">
+      <div class="tweet-header">
+        <span>{{ tweet.user_name }}</span>
+        <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
+      </div>
+      <h3>{{ tweet.title }}</h3>
+      <p>{{ tweet.post }}</p>
+      <img *ngIf="tweet.img" [src]="tweet.img" alt="Reply image" />
     </div>
-    <h3>{{ reply.title }}</h3>
-    <p>{{ reply.post }}</p>
-    <img *ngIf="reply.img" [src]="reply.img" alt="Reply image" />
+  </div>
+
+  <div class="searched-replies" *ngIf="searchedReplies.length">
+    <h2>Replies</h2>
+    <div *ngFor="let reply of searchedReplies" class="reply">
+      <div class="reply-header">
+        <span>{{ reply.user_name }}</span>
+        <span>{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
+      </div>
+      <h3>{{ reply.title }}</h3>
+      <p>{{ reply.post }}</p>
+      <img *ngIf="reply.img" [src]="reply.img" alt="Reply image" />
+    </div>
   </div>
 </div>
