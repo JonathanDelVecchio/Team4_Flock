@@ -11,10 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootApplication
 public class App {
-
     public static void main(String[] args) {
-        //FlockDao dao=new FlockDaoImpl();
-        //dao.createTables();
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         FlockServiceLayer sl = ctx.getBean("serviceLayer", FlockServiceLayerImpl.class);
         
