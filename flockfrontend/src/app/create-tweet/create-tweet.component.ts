@@ -12,14 +12,30 @@ export class CreateTweetComponent {
   selectedFile: File | null = null;
   @Output() tweetCreated = new EventEmitter<void>();
   @Input() showTweetForm = false;
+  imageData: string = '';
+
 
 
   constructor(private tweetService: TweetService) {
   }
 
+
+
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedFile = file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result?.toString() ?? '';
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  /*
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
-  }
+  }*/
 
   async createTweet() {
     if (this.selectedFile) {
