@@ -2,12 +2,10 @@
   max-width: 800px;
   margin: 0 auto;
   display: flex;
-  justify-content: center; // Change to center from space-between
+  justify-content: center;
   align-items: center;
   padding: 20px 0;
-  gap: 10px; // Add gap to separate input and buttons
-
-
+  gap: 10px;
 }
 
 input {
@@ -25,7 +23,6 @@ button {
   color: #fff;
   border: none;
   border-radius: 4px;
-  margin-left: 0; // Remove margin-left
 }
 
 .results-container {
@@ -45,6 +42,9 @@ button {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tweet-header,
@@ -53,6 +53,13 @@ button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  width: 100%;
+}
+
+img {
+  max-width: 800px;
+  height: auto;
+  object-fit: cover;
 }
 
 h3 {

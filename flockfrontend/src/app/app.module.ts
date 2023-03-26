@@ -18,6 +18,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 import {OrderPipe} from './pipes/order-pipe';
 import { SearchTweetsComponent } from './search-tweets/search-tweets.component';
+import {RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -28,6 +31,7 @@ import { SearchTweetsComponent } from './search-tweets/search-tweets.component';
     ReplyComponent,
     OrderPipe,
     SearchTweetsComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule,
     FormsModule,
@@ -38,7 +42,8 @@ import { SearchTweetsComponent } from './search-tweets/search-tweets.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule,],
+    AppRoutingModule,
+    ReactiveFormsModule, RouterOutlet,],
   providers: [TweetService],
   bootstrap: [AppComponent],
 
