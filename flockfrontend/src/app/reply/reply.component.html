@@ -1,6 +1,6 @@
 <div class="reply">
   <form *ngIf="selectedTweetId === tweetId" (ngSubmit)="createReply()" #replyForm="ngForm">
-  <input type="text" placeholder="Username" [(ngModel)]="reply.user_name" name="user_name" required>
+    <input type="text" placeholder="Username" [(ngModel)]="reply.user_name" name="user_name" required>
     <input type="text" placeholder="Title" [(ngModel)]="reply.title" name="title" required>
     <textarea placeholder="Reply" [(ngModel)]="reply.post" name="post" required></textarea>
     <input type="file" (change)="onFileSelected($event)"/>

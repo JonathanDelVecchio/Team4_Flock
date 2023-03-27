@@ -1,39 +1,55 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import {AppComponent} from './app.component';
-import {CreateTweetComponent} from '../app/create-tweet/create-tweet.component';
-import {TweetHistoryComponent} from '../app/tweet-history/tweet-history.component';
-import {ReplyComponent} from '../app/reply/reply.component';
-import {TweetService} from './services/tweet.service';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { UserModule } from './user/user.module';
+import { NavComponent } from './nav/nav.component';
+import { AngularFireModule } from '@angular/fire/compat'
+import { environment } from 'src/environments/environment';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth'
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {CreateTweetComponent} from "./create-tweet/create-tweet.component";
+import {TweetHistoryComponent} from "./tweet-history/tweet-history.component";
+import {SearchTweetsComponent} from "./search-tweets/search-tweets.component";
+import {OrderPipe} from "./pipes/order-pipe";
+import {ReplyComponent} from "./reply/reply.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {MatDialogModule} from "@angular/material/dialog";
+import {TweetService} from "./services/tweet.service";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {HomeComponent} from "./home/home.component";
+import {Routes} from "@angular/router";
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {ReactiveFormsModule} from '@angular/forms';
-
-import {OrderPipe} from './pipes/order-pipe';
-import { SearchTweetsComponent } from './search-tweets/search-tweets.component';
-import {RouterOutlet} from "@angular/router";
-import {AppRoutingModule} from "./app-routing.module";
-import { HomeComponent } from './home/home.component';
-
+const routes: Routes = [
+  { path: '', component: HomeComponent }, // Add the HomeComponent route
+  { path: 'search', component: SearchTweetsComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavComponent,
     CreateTweetComponent,
     TweetHistoryComponent,
     ReplyComponent,
     OrderPipe,
     SearchTweetsComponent,
-    HomeComponent,
+    HomeComponent
+
   ],
-  imports: [BrowserModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    UserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -42,11 +58,9 @@ import { HomeComponent } from './home/home.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AppRoutingModule,
-    ReactiveFormsModule, RouterOutlet,],
+    ReactiveFormsModule,],
   providers: [TweetService],
   bootstrap: [AppComponent],
 
 })
-export class AppModule {
-}
+export class AppModule { }
