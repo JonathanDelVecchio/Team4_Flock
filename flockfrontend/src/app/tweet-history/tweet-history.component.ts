@@ -20,6 +20,7 @@ export class TweetHistoryComponent implements OnInit {
 
 
   @ViewChild(ReplyComponent) replyComponent!: ReplyComponent;
+  public showReplyForm: boolean | undefined;
 
   constructor(private tweetService: TweetService, private fb: FormBuilder) {
   }
@@ -74,9 +75,9 @@ export class TweetHistoryComponent implements OnInit {
     tweet.editMode = false;
   }
 
-  toggleReplyForm(tweetId: number): void {
-    this.selectedTweetId = this.selectedTweetId === tweetId ? null : tweetId;
-  }
+  // toggleReplyForm(tweetId: number): void {
+  //   this.selectedTweetId = this.selectedTweetId === tweetId ? null : tweetId;
+  // }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
@@ -101,5 +102,10 @@ export class TweetHistoryComponent implements OnInit {
       reader.readAsDataURL(file);
     });
   }
+  toggleReplyForm(tweetId: number) {
+    this.selectedTweetId = this.selectedTweetId === tweetId ? null : tweetId;
+    this.showReplyForm = !this.showReplyForm;
+  }
+
 
 }

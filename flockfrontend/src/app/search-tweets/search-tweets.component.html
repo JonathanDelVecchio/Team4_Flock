@@ -9,8 +9,8 @@
     <h2>Tweets</h2>
     <div *ngFor="let tweet of searchedTweets" class="tweet">
       <div class="tweet-header">
-        <span>{{ tweet.user_name }}</span>
-        <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
+        <span class="user_name">{{ tweet.user_name }}</span>
+        <span class="date">{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
       </div>
       <h3>{{ tweet.title }}</h3>
       <p>{{ tweet.post }}</p>
@@ -22,8 +22,8 @@
     <h2>Replies</h2>
     <div *ngFor="let reply of searchedReplies" class="reply">
       <div class="reply-header">
-        <span>{{ reply.user_name }}</span>
-        <span>{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
+        <span class="user_name">{{ reply.user_name }}</span>
+        <span class="date">{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
       </div>
       <h3>{{ reply.title }}</h3>
       <p>{{ reply.post }}</p>
@@ -31,3 +31,4 @@
     </div>
   </div>
 </div>
+

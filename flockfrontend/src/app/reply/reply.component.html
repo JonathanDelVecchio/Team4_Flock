@@ -10,21 +10,26 @@
 
   <div *ngFor="let reply of replies | orderBy: 'id':true" class="reply-item">
     <div class="reply-header">
-      <span>{{ reply.user_name }}</span>
-      <span>{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
+      <span class="user-name">{{ reply.user_name }}</span>
+      <span class="date">{{ reply.date | date: 'MMM d, y, h:mm a z' }}</span>
     </div>
-    <h3>{{ reply.title }}</h3>
-    <p>{{ reply.post }}</p>
+    <h3 class="title">{{ reply.title }}</h3>
+    <p class="post">{{ reply.post }}</p>
     <img *ngIf="reply.img" [src]="reply.img" alt="Reply image" class="reply-image"/>
-    <button mat-button (click)="deleteReply(reply.id)">Delete</button>
-    <button mat-button (click)="toggleEditMode(reply)">Edit</button>
+    <div class="buttons-container">
+      <button mat-button (click)="deleteReply(reply.id)">Delete</button>
+      <button mat-button (click)="toggleEditMode(reply)">Edit</button>
+    </div>
 
-    <form *ngIf="reply.editMode" [formGroup]="editReplyForm">
-      <input formControlName="title" [(ngModel)]="reply.title" placeholder="Title"/>
-      <textarea formControlName="reply" [(ngModel)]="reply.post" placeholder="Reply"></textarea>
-      <div>
+    <form *ngIf="reply.editMode" [formGroup]="editReplyForm" class="edit-reply-form">
+      <input formControlName="title" [(ngModel)]="reply.title" placeholder="Title" class="edit-input"/>
+      <textarea formControlName="reply" [(ngModel)]="reply.post" placeholder="Reply" class="edit-textarea"></textarea>
+      <div class="file-input">
         <input type="file" (change)="onFileSelected($event)"/>
-        <button (click)="saveChanges(reply)">Save</button>
+      </div>
+      <div>
+        <button class="save-btn" (click)="saveChanges(reply)">Save</button>
+<!--        <button class="cancel-btn" (click)="cancelChanges(reply)">Cancel</button>-->
       </div>
     </form>
 
