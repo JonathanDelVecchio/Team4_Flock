@@ -1,6 +1,13 @@
 # README for Flock Backend
 
-The front end of flock is built using Angular. It demonstrates basic features of a social media platform where users can post tweets, reply to tweets, and search for tweets by username.
+The front end of flock is built using Angular. It demonstrates basic features of a social media platform where users can post tweets, reply to tweets, and search for tweets by username. This document provides an overview of the backend file structure, as well as descriptions of the individual code files.
+
+|Team Members| 
+|----------------|
+|Andrew Wang|
+|Nicholas Tan|
+|Jonathan Del Vecchio|
+|Deniz Childir|
 
 ## Features
 - Create and post tweets
