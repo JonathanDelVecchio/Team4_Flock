@@ -44,7 +44,7 @@
     </div>
 <!--    <app-reply *ngIf="selectedTweetId === tweet.id" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>-->
     <!-- Add a class "reply-container" to the app-reply component -->
-    <app-reply *ngIf="selectedTweetId === tweet.id" class="reply-container" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>
+    <app-reply class="reply-container" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>
 
 
     <form *ngIf="tweet.editMode" [formGroup]="editTweetForm" class="edit-tweet-form">
