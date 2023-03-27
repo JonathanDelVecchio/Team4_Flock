@@ -1,5 +1,5 @@
 # README for Flock Backend
-Flock is a Twitter clone backend built using Java, Spring Boot, and MySQL. This document provides an overview of the backend file structure, as well as descriptions of the individual code files.
+The backend of Flock is built using Java, Spring Boot, and MySQL. This document provides an overview of the backend file structure, as well as descriptions of the individual code files.
 
 |Team Members| 
 |----------------|
