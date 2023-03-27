@@ -1,25 +1,56 @@
+<!--<div class="tweet-history">-->
+<!--  <button *ngIf="!showCreateTweetForm" (click)="showCreateTweetForm = !showCreateTweetForm" class="toggle-tweet-form">Post Tweet</button>-->
+<!--  <app-create-tweet (tweetCreated)="loadTweets()" (tweetCanceled)="showCreateTweetForm = false" [showTweetForm]="showCreateTweetForm"></app-create-tweet>-->
+<!--  <div *ngFor="let tweet of tweets" class="tweet">-->
+<!--    <div class="tweet-header">-->
+<!--      <span>{{ tweet.user_name }}</span>-->
+<!--      <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>-->
+<!--    </div>-->
+<!--    <h3>{{ tweet.title }}</h3>-->
+<!--    <p>{{ tweet.post }}</p>-->
+<!--    <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image"/>-->
+<!--    <div class="tweet-actions"> &lt;!&ndash; Added tweet-actions class &ndash;&gt;-->
+<!--      <button mat-button (click)="deleteTweet(tweet.id)">Delete</button>-->
+<!--      <button mat-button (click)="toggleEditMode(tweet)">Edit</button>-->
+<!--      <button mat-button (click)="toggleReplyForm(selectedTweetId ? selectedTweetId : tweet.id)">Reply</button>-->
+<!--    </div>-->
+<!--    <app-reply *ngIf="selectedTweetId === tweet.id" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>-->
+
+<!--    <form *ngIf="tweet.editMode" [formGroup]="editTweetForm" class="edit-tweet-form"> &lt;!&ndash; Added edit-tweet-form class &ndash;&gt;-->
+<!--      <input formControlName="title" [(ngModel)]="tweet.title" placeholder="Title"/>-->
+<!--      <textarea formControlName="tweet" [(ngModel)]="tweet.post" placeholder="Tweet"></textarea>-->
+<!--      <div class="file-and-save"> &lt;!&ndash; Added file-and-save class &ndash;&gt;-->
+<!--        <input type="file" (change)="onFileSelected($event)"/>-->
+<!--        <button (click)="saveChanges(tweet)">Save</button>-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
 <div class="tweet-history">
   <button *ngIf="!showCreateTweetForm" (click)="showCreateTweetForm = !showCreateTweetForm" class="toggle-tweet-form">Post Tweet</button>
   <app-create-tweet (tweetCreated)="loadTweets()" (tweetCanceled)="showCreateTweetForm = false" [showTweetForm]="showCreateTweetForm"></app-create-tweet>
   <div *ngFor="let tweet of tweets" class="tweet">
     <div class="tweet-header">
       <span>{{ tweet.user_name }}</span>
-      <span>{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
+      <span class="tweet-date">{{ tweet.date | date: 'MMM d, y, h:mm a z' }}</span>
     </div>
     <h3>{{ tweet.title }}</h3>
     <p>{{ tweet.post }}</p>
     <img *ngIf="tweet.img" [src]="tweet.img" alt="Tweet image"/>
-    <div class="tweet-actions"> <!-- Added tweet-actions class -->
+    <div class="tweet-actions">
       <button mat-button (click)="deleteTweet(tweet.id)">Delete</button>
       <button mat-button (click)="toggleEditMode(tweet)">Edit</button>
       <button mat-button (click)="toggleReplyForm(selectedTweetId ? selectedTweetId : tweet.id)">Reply</button>
     </div>
-    <app-reply *ngIf="selectedTweetId === tweet.id" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>
+<!--    <app-reply *ngIf="selectedTweetId === tweet.id" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>-->
+    <!-- Add a class "reply-container" to the app-reply component -->
+    <app-reply *ngIf="selectedTweetId === tweet.id" class="reply-container" [tweetId]="tweet.id" [selectedTweetId]="selectedTweetId"></app-reply>
 
-    <form *ngIf="tweet.editMode" [formGroup]="editTweetForm" class="edit-tweet-form"> <!-- Added edit-tweet-form class -->
+
+    <form *ngIf="tweet.editMode" [formGroup]="editTweetForm" class="edit-tweet-form">
       <input formControlName="title" [(ngModel)]="tweet.title" placeholder="Title"/>
       <textarea formControlName="tweet" [(ngModel)]="tweet.post" placeholder="Tweet"></textarea>
-      <div class="file-and-save"> <!-- Added file-and-save class -->
+      <div class="file-and-save">
         <input type="file" (change)="onFileSelected($event)"/>
         <button (click)="saveChanges(tweet)">Save</button>
       </div>

@@ -1,54 +1,72 @@
 //.tweet-history {
-//  .tweet {
-//    font-family: 'Helvetica Neue', Arial, sans-serif;
-//    padding: 10px;
-//    border: 1px solid #ccc;
-//    margin-bottom: 10px;
-//    border-radius: 20px;
+//  max-width: 800px;
+//  margin: 0 auto;
+//}
 //
-//    .tweet-header {
-//      font-family: 'Helvetica Neue', Arial, sans-serif;
-//      display: flex;
-//      justify-content: space-between;
-//      font-size: 0.9rem;
-//    }
-//  }
+//.toggle-tweet-form {
+//  display: block;
+//  margin-bottom: 20px;
+//}
 //
-//  form {
-//    display: flex;
-//    flex-direction: column;
-//    gap: 10px;
+//.tweet {
+//  background-color: #fff;
+//  padding: 20px;
+//  border-radius: 8px;
+//  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//  margin-bottom: 20px;
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
 //
-//    input,
-//    textarea {
-//      border-radius: 5px;
-//      font-family: 'Helvetica Neue', Arial, sans-serif;
-//      padding: 5px;
-//    }
-//  }
-//
-//  .toggle-tweet-form {
-//    font-family: 'Helvetica Neue', Arial, sans-serif;
-//    background-color: #1DA1F2;
-//    color: white;
-//    border: none;
-//    border-radius: 20px;
-//    padding: 10px 20px;
-//    font-size: 1.2rem;
-//    font-weight: bold;
-//    cursor: pointer;
-//    transition: all 0.3s ease;
-//    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-//    text-align: center;
-//    display: block;
-//    margin: 0 auto;
-//  }
-//
-//  .toggle-tweet-form:hover {
-//    background-color: #0c87b8;
-//    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+//  img {
+//    max-width: 800px;
+//    height: auto;
 //  }
 //}
+//
+//.tweet-header {
+//  display: flex;
+//  justify-content: space-between;
+//  align-items: center;
+//  margin-bottom: 10px;
+//  width: 100%;
+//}
+//
+//.tweet-actions {
+//  display: flex;
+//  gap: 10px;
+//  margin-bottom: 20px;
+//}
+//
+//.edit-tweet-form {
+//  display: flex;
+//  flex-direction: column;
+//  gap: 10px;
+//}
+//
+//.file-and-save {
+//  display: flex;
+//  align-items: center;
+//  gap: 10px;
+//}
+//
+//input, textarea {
+//  padding: 10px;
+//  font-size: 16px;
+//  border: 1px solid #ccc;
+//  border-radius: 4px;
+//}
+//
+//button {
+//  padding: 10px 20px;
+//  font-size: 16px;
+//  cursor: pointer;
+//  background-color: #007bff;
+//  color: #fff;
+//  border: none;
+//  border-radius: 4px;
+//}
+//
 .tweet-history {
   max-width: 800px;
   margin: 0 auto;
@@ -67,11 +85,14 @@
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  width: 100%;
 
   img {
-    max-width: 800px;
+    max-width: 100%;
     height: auto;
+    display: block;
+    margin: 0 auto;
   }
 }
 
@@ -81,6 +102,15 @@
   align-items: center;
   margin-bottom: 10px;
   width: 100%;
+
+  // Add this selector to increase the font size for username and date
+  span {
+    font-size: 24px;
+  }
+}
+
+.tweet-date {
+  text-align: right;
 }
 
 .tweet-actions {
@@ -88,6 +118,24 @@
   gap: 10px;
   margin-bottom: 20px;
 }
+
+// ... (other styles)
+
+.reply-container {
+  width: 100%;
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    padding-left: 20px; // Add padding to the left
+    padding-right: 20px; // Add padding to the right
+  }
+}
+
+// ... (other styles)
+
 
 .edit-tweet-form {
   display: flex;
@@ -106,6 +154,11 @@ input, textarea {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+h3, p {
+  font-size: 24px;
+  margin: 0;
 }
 
 button {
